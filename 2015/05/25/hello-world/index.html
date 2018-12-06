@@ -6,16 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>new page | Hexo</title>
+  <title>和弦推导逻辑简析 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="new page">
-<meta property="og:url" content="http://yoursite.com/2018/12/05/new-page/index.html">
+  <meta name="description" content="Image By Dustin Wallace 诚然，吉他有上千个和弦。世界上最厉害的吉他大师，也无法一眼辨识出所有的和弦。 更多时候，我们熟记几个基本的和弦，然后通过一定的计算法则，去推导其他的和弦。因而推导的逻辑就非常重要。 《吉他三月通》一书把这乐理洋洋洒洒说了一百多页，我想试着让事情简单一些。 最后，我们将逻辑实现成一个小程序，可以方便打印出想要推导的和弦。">
+<meta name="keywords" content="旧事">
+<meta property="og:type" content="article">
+<meta property="og:title" content="和弦推导逻辑简析">
+<meta property="og:url" content="http://yoursite.com/2015/05/25/hello-world/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Image By Dustin Wallace 诚然，吉他有上千个和弦。世界上最厉害的吉他大师，也无法一眼辨识出所有的和弦。 更多时候，我们熟记几个基本的和弦，然后通过一定的计算法则，去推导其他的和弦。因而推导的逻辑就非常重要。 《吉他三月通》一书把这乐理洋洋洒洒说了一百多页，我想试着让事情简单一些。 最后，我们将逻辑实现成一个小程序，可以方便打印出想要推导的和弦。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-05T03:27:48.454Z">
+<meta property="og:updated_time" content="2018-12-06T09:01:13.242Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="new page">
+<meta name="twitter:title" content="和弦推导逻辑简析">
+<meta name="twitter:description" content="Image By Dustin Wallace 诚然，吉他有上千个和弦。世界上最厉害的吉他大师，也无法一眼辨识出所有的和弦。 更多时候，我们熟记几个基本的和弦，然后通过一定的计算法则，去推导其他的和弦。因而推导的逻辑就非常重要。 《吉他三月通》一书把这乐理洋洋洒洒说了一百多页，我想试着让事情简单一些。 最后，我们将逻辑实现成一个小程序，可以方便打印出想要推导的和弦。">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -151,34 +155,96 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-new-page" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-hello-world" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      new page
+      和弦推导逻辑简析
     </h1>
   
 
         
-        <a href="/2018/12/05/new-page/" class="archive-article-date">
-  	<time datetime="2018-12-05T03:26:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-05</time>
+        <a href="/2015/05/25/hello-world/" class="archive-article-date">
+  	<time datetime="2015-05-25T15:01:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-05-25</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
-      123
-      false456
-      new page789
-      1543980413000101
-      undefined111
-
-
       
-        
+        <p>Image By Dustin Wallace</p>
+<p>诚然，吉他有上千个和弦。世界上最厉害的吉他大师，也无法一眼辨识出所有的和弦。</p>
+<p>更多时候，我们熟记几个基本的和弦，然后通过一定的计算法则，去推导其他的和弦。因而推导的逻辑就非常重要。</p>
+<p>《吉他三月通》一书把这乐理洋洋洒洒说了一百多页，我想试着让事情简单一些。</p>
+<p>最后，我们将逻辑实现成一个小程序，可以方便打印出想要推导的和弦。<br><a id="more"></a></p>
+<p>###音乐与数学</p>
+<p>既然是逻辑，都可以用数学去建模，然而音乐与数学之间，却有一点非常重要的差异。</p>
+<p>在这之前，我们得谈点有趣的事情，它们都有共同的原因：</p>
+<p>为什么我们会觉得某首歌很“中国风”？<br>为什么某些日本的传统音乐听起来很“诡异”？<br>为什么钢琴要做成黑键白键，所有键都一样不行吗？<br>我们常用——</p>
+<p>正整数：1、2、3、4、5、6、7 ， 对应和弦：C、D、E、F、G、A、B， 对应音符：Do、Re、Me、Fa、So、La、Ti</p>
+<p>每个正整数之间，都是相差1；而按频率高低排列的音符，由于历史原因，它们并不是等差数列。</p>
+<p>实际上，4比理想的要低一点，7比理想的要高一点，其他的5个音，则基本在理想线性曲线上！</p>
+<p>音阶频率曲线</p>
+<p>这5个跟理想比较吻合的音，就是天朝古代的五音阶：宫、商、角、徵、羽。“中国风”的歌曲，大多使用了这五个音，所以让人感到舒服和温和；而日本的传统音乐，反其道而行用了许多4与7（这么说也不太对，具体是受阴阳调式影响，但表现上大概如此），有一种幽静阴深的效果。</p>
+<p>所以，以上问题的原因是：音符的递增不完全是线性的！</p>
+<p>我们得把4和7这两个不和谐点标志出来，就出现了“半音和全音”的理论。 把3到4和7到1这两个不满一个跨度的叫做半音；其他相邻音符之间，都叫做全音。 而造物主的神奇之处在于：两个半音等于一个全音。</p>
+<p>音乐的世界跟数学的这点不同，会在后面逻辑推导上会给我们一点小小的麻烦。</p>
+<p>###音乐家与程序员</p>
+<p>试想，如果程序员要完成描述音阶的数据结构，会如何设计呢？</p>
+<p>通常，应该先规划“最小粒度”。而“半音”刚好是最合适的选择。</p>
+<p>音乐家与程序员的处理方式如出一辙，钢琴上夹在两个白键之间的黑键，吉他相邻品丝之间，都是为了表现出半音。</p>
+<p>如果用程序描述吉他品丝的关系就是：</p>
+<p>var scale = [2, 2, 1, 2, 2, 2, 1];  //3-4是半音，7-1也是半音，相隔1品；其他是全音，相隔2品</p>
+<p>###吉他与尺子</p>
+<p>知道了这些，我们就好比掌握了一把尺子的刻度。</p>
+<p>在尺子上，如果一个刻度表示1cm，那么从3cm往后推两个格子，就是5cm； 把吉他想象成尺子，一个刻度表示半音，和弦之间就可以推导了。</p>
+<p>与众不同的是，这把尺子首尾相连，更像一个循环的圈。</p>
+<p>刻度：    2品       2品       1品       2品       2品       2品       1品       2品       2品<br>和弦：C  +—-&gt; D  +—-&gt; E  +—-&gt; F  +—-&gt; G  +—-&gt; A  +—-&gt; B  +—-&gt; C  +—-&gt; D  +—-&gt; ……<br>音符：Do +—-&gt; Re +—-&gt; Me +—-&gt; Fa +—-&gt; So +—-&gt; La +—-&gt; Ti +—-&gt; Do +—-&gt; Re +—-&gt; ……<br>整数：1  +—-&gt; 2  +—-&gt; 3  +—-&gt; 4  +—-&gt; 5  +—-&gt; 6  +—-&gt; 7  +—-&gt; 1  +—-&gt; 2  +—-&gt; ……<br>因而，一个和弦可以有多种方式弹奏。 比如C和弦，除了最基础的开放式（不需要用食指横按品丝）指法，我们还可以用A和弦的指法实现：</p>
+<p>C = B + 1品<br>  = A + 2品 + 1品<br>  = A + 3品<br>所以，我们用食指横按住第3品（或者用变调夹夹第3品），然后再加上A和弦的开放式指法，就形成了一个C和弦。</p>
+<p>同理也可以用E和弦实现：</p>
+<p>C = B + 1品<br>  = A + 2品 + 1品<br>  = G + 2品 + 2品 + 1品<br>  = F + 2品 + 2品 + 2品 + 1品<br>  = E + 1品 + 2品 + 2品 + 2品 + 1品<br>  = E + 8品<br>横按的位置就在第8品上。</p>
+<p>其实大部分情况下，我们都是用A，E，Am，Em这四个和弦去推导其他和弦，因为这几个和弦横按与转换比较方便，特别是在扫弦的时候。</p>
+<p>###程序实现</p>
+<p>明确逻辑之后，就差程序实现了。但这之前，我们定了程序的最小粒度是1品，就无可避免遇到一个问题：</p>
+<p>如果A + 2品 = B，那A + 1品 = ？</p>
+<p>这个和弦介于A与B之间，人们把它称为升A或降B，对应记法是A#或Bb。</p>
+<p>至此我们可以列出，用E指法和A指法推导的所有和弦的横按位置：</p>
+<p>var positions = {<br>    “E”: {<br>        “A”:  5,<br>        “A#”: 6,<br>        “Bb”: 6,<br>        “B”:  7,<br>        “C”:  8,<br>        “C#”: 9,<br>        “Db”: 9,<br>        “D”:  10,<br>        “D#”: 11,<br>        “Eb”: 11,<br>        “E”:  12,<br>        “F”:  1,<br>        “F#”: 2,<br>        “Gb”: 2,<br>        “G”:  3,<br>        “G#”: 4,<br>        “Ab”: 4<br>    },<br>    “A”: {<br>         “A”:  12,<br>         “A#”: 1,<br>         “Bb”: 1,<br>         “B”:  2,<br>         “C”:  3,<br>         “C#”: 4,<br>         “Db”: 4,<br>         “D”:  5,<br>         “D#”: 6,<br>         “Eb”: 6,<br>         “E”:  7,<br>         “F”:  8,<br>         “F#”: 9,<br>         “Gb”: 9,<br>         “G”:  10,<br>         “G#”: 11,<br>         “Ab”: 11<br>    }<br>  };<br>同时，将E、A的开放和弦的指型描述出来：</p>
+<pre><code>//这里仅列出E、A大小和弦，共四种指法
+//更详细指法数据结构可参看后面demo
+
+chord_shapes = {
+      &quot;M E&quot;: {
+        name: &quot;Maj&quot;,
+        chord: [[3, 2], [4, 3], [5, 3]],
+        bars: [{from_string: 6, to_string: 1, fret: 1}]
+      },
+      &quot;m E&quot;: {
+        name: &quot;m&quot;,
+        chord: [[4, 3], [5, 3]],
+        bars: [{from_string: 6, to_string: 1, fret: 1}]
+      },
+      &quot;M A&quot;: {
+        name: &quot;Maj&quot;,
+        chord: [[2, 3], [3, 3], [4, 3], [6, &quot;x&quot;]],
+        bars: [{from_string: 5, to_string: 1, fret: 1}]
+      },
+      &quot;m A&quot;: {
+        name: &quot;m&quot;,
+        chord: [[2, 2], [3, 3], [4, 3], [6, &quot;x&quot;]],
+        bars: [{from_string: 5, to_string: 1, fret: 1}]
+      }
+};
+</code></pre><p>分别传递“和弦名”,“指法”，“类型”作为参数，我们就可以很容易的画出和弦：</p>
+<p>createChord(“C”, “A”, “M A”);  \画出C和弦，用A指法，定义类型是大三和弦(Maj)<br>createChord(“D”, “A”, “m A”);  \画出Dm和弦，用A指法，定义类型是小三和弦(Minor)</p>
+<p>###Demo</p>
+<p>以下是完整Demo，将上述chord_shapes的指型补充得更完整。</p>
+<p>并且尝试用A指型，自动生成了C调的7个常用和弦。</p>
+<p>End. 2015.5.25</p>
+
       
 
       
@@ -207,6 +273,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">旧事</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -257,7 +334,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/12/05/new-page/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2015/05/25/hello-world/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -269,16 +346,6 @@
 </article>
 
   
-<nav id="article-nav">
-  
-  
-    <a href="/2018/12/04/kebi/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">kebi</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -397,6 +464,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">css3</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">旧事</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
