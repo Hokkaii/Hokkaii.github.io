@@ -6,18 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>我了解的JavaScript运行机制-1（闭包） | Hokkaii的博客</title>
+  <title>我了解的JavaScript运行机制-1（闭包，作用域链） | Hokkaii的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="作用域首先，明确一个概念，作用域：编程语言中函数与变量的可访问范围编程语言中的作用域有两种：词法作用域与动态作用域。  词法作用域:这种作用域的访问范围在编译之时就被确定了，不会因为执行环境的改变而改变，因此词法作用域也叫做静态作用域，JavaScript就使用这种作用域。 动态作用域：动态作用域的访问范围由执行的环境决定。   JavaScript中作用域的分类全局作用域，局部作用域（函数作用域">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我了解的JavaScript运行机制-1（闭包）">
+<meta property="og:title" content="我了解的JavaScript运行机制-1（闭包，作用域链）">
 <meta property="og:url" content="http://yoursite.com/2018/12/07/我了解的JavaScript运行机制-1/index.html">
 <meta property="og:site_name" content="Hokkaii的博客">
 <meta property="og:description" content="作用域首先，明确一个概念，作用域：编程语言中函数与变量的可访问范围编程语言中的作用域有两种：词法作用域与动态作用域。  词法作用域:这种作用域的访问范围在编译之时就被确定了，不会因为执行环境的改变而改变，因此词法作用域也叫做静态作用域，JavaScript就使用这种作用域。 动态作用域：动态作用域的访问范围由执行的环境决定。   JavaScript中作用域的分类全局作用域，局部作用域（函数作用域">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-10T12:26:30.025Z">
+<meta property="og:updated_time" content="2018-12-13T09:57:54.584Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我了解的JavaScript运行机制-1（闭包）">
+<meta name="twitter:title" content="我了解的JavaScript运行机制-1（闭包，作用域链）">
 <meta name="twitter:description" content="作用域首先，明确一个概念，作用域：编程语言中函数与变量的可访问范围编程语言中的作用域有两种：词法作用域与动态作用域。  词法作用域:这种作用域的访问范围在编译之时就被确定了，不会因为执行环境的改变而改变，因此词法作用域也叫做静态作用域，JavaScript就使用这种作用域。 动态作用域：动态作用域的访问范围由执行的环境决定。   JavaScript中作用域的分类全局作用域，局部作用域（函数作用域">
   
     <link rel="alternative" href="/atom.xml" title="Hokkaii的博客" type="application/atom+xml">
@@ -149,7 +149,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      我了解的JavaScript运行机制-1（闭包）
+      我了解的JavaScript运行机制-1（闭包，作用域链）
     </h1>
   
 
@@ -176,7 +176,7 @@
 <h2 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h2><p>执行上下文的组成：<br>变量对象(variable object)，this指针(this value)，作用域链(scope chain)</p>
 <hr>
 <h2 id="变量对象，活动对象，全局对象"><a href="#变量对象，活动对象，全局对象" class="headerlink" title="变量对象，活动对象，全局对象"></a>变量对象，活动对象，全局对象</h2><ul>
-<li>变量对象（Variable Object）变量对象(variable object) 是与执行上下文相关的 数据作用域(scope of data) 。它是与上下文关联的特殊对象，用于存储被定义在上下文中的 变量(variables) 和 函数声明(function declarations) 。变量对象不能被直接访问，这一情况在全局上下文中有例外，因为全局对象本身就是变量对象。</li>
+<li>变量对象（Variable Object）变量对象(variable object) 是与执行上下文相关的数据作用域(scope of data) 。它是与上下文关联的特殊对象，用于存储被定义在上下文中的 变量(variables) 和 函数声明(function declarations) 。变量对象不能被直接访问，这一情况在全局上下文中有例外，因为全局对象本身就是变量对象。</li>
 <li>全局对象(Global object)：全局对象(Global object) 是在进入任何执行上下文之前就已经创建了的对象；这个对象只存在一份，它的属性在程序中任何地方都可以访问，全局对象的生命周期终止于程序退出那一刻。全局对象初始创建阶段将Math、String、Date、parseInt作为自身属性初始化，同样也可以有额外创建的其它对象作为属性（其可以指向到全局对象自身），全局对象本身就是变量对象。</li>
 <li>活动对象（activation object）：在函数被调用之时，会生成一个函数上下文，函数的上下文的活动对象会被作为变量对象使用，除函数作用域的变量声明和函数声明外，它还囊括了arguments对象。</li>
 </ul>
@@ -197,7 +197,7 @@
 </ul>
 <p>这样利用立即执行函数构建一个独立的上下文，每个立即执行函数的[[scope]]互不干扰，因此其作用域链也不会受影响，我们就可以得到理想结果。</p>
 <ul>
-<li>使用const或者let声明一个块级作用域<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var data = [];</span><br><span class="line">for (let k = 0; k &lt; 3; k++) &#123;</span><br><span class="line">  data[k] = function (x) &#123;</span><br><span class="line">    console.log(x);</span><br><span class="line">  &#125;; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>使用const或者let声明一个块级作用域，在这里块级作用域也会产生变量对象，因此下边代码块级作用域内部声明的不同函数的[[scope]]是不同的，互不影响。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var data = [];</span><br><span class="line">for (let k = 0; k &lt; 3; k++) &#123;</span><br><span class="line">  data[k] = function (x) &#123;</span><br><span class="line">    console.log(x);</span><br><span class="line">  &#125;; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>const与let可以构建块级作用域。<br>在for语句内使用let或者const声明的变量会构建块级作用域。因此每个函数的[[scope]]不再互相共享，不会互相影响，我们就可以得到理想结果。</p>
@@ -228,7 +228,7 @@
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          我了解的JavaScript运行机制-2（异步）
+          我了解的JavaScript运行机制-2（异步与事件循环）
         
       </div>
     </a>

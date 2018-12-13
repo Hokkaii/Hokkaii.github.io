@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hokkaii的博客</title>
+  <title>我了解的JavaScript运行机制-3（异步编程方案） | Hokkaii的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hokkaii的博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="回调函数事件监听Observablepromiseasync/awaitGenerator待续。。。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我了解的JavaScript运行机制-3（异步编程方案）">
+<meta property="og:url" content="http://yoursite.com/2018/12/13/我了解的JavaScript运行机制-3（异步编程方案）/index.html">
 <meta property="og:site_name" content="Hokkaii的博客">
+<meta property="og:description" content="回调函数事件监听Observablepromiseasync/awaitGenerator待续。。。">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-12-13T12:03:42.676Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hokkaii的博客">
+<meta name="twitter:title" content="我了解的JavaScript运行机制-3（异步编程方案）">
+<meta name="twitter:description" content="回调函数事件监听Observablepromiseasync/awaitGenerator待续。。。">
   
     <link rel="alternative" href="/atom.xml" title="Hokkaii的博客" type="application/atom+xml">
   
@@ -138,16 +142,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-我了解的JavaScript运行机制-3（异步编程方案）" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+            <article id="post-我了解的JavaScript运行机制-3（异步编程方案）" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/13/我了解的JavaScript运行机制-3（异步编程方案）/">我了解的JavaScript运行机制-3（异步编程方案）</a>
+    <h1 class="article-title" itemprop="name">
+      我了解的JavaScript运行机制-3（异步编程方案）
     </h1>
   
 
@@ -172,16 +174,24 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/13/我了解的JavaScript运行机制-3（异步编程方案）/">展开全文 >></a>
-        </p>
-      
 
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2018/12/08/我了解的JavaScript运行机制-2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">我了解的JavaScript运行机制-2（异步与事件循环）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -201,277 +211,14 @@
 
 
 
-
   
-    <article id="post-我了解的JavaScript运行机制-2" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/08/我了解的JavaScript运行机制-2/">我了解的JavaScript运行机制-2（异步与事件循环）</a>
-    </h1>
   
 
-        
-        <a href="/2018/12/08/我了解的JavaScript运行机制-2/" class="archive-article-date">
-  	<time datetime="2018-12-08T05:34:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="提要"><a href="#提要" class="headerlink" title="提要"></a>提要</h2><p>这里只谈JavaScript在浏览器环境中的事件循环（Event Loop），不涉及Nodejs环境的情况。<br>首先，JavaScript是一门单线程语言。单线程，顾名思义，就意味着代码的执行是由上而下顺序执行的，也就是说只能是一个任务执行完毕之后，随后的任务才可以接着执行。考虑到Javascript是一门浏览器脚本语言，因此前者只能是单线程的。伴随着单线程接踵而至的就是堵塞问题，因为难免有一些任务执行速度比较慢，最常见的Ajax请求便是如此。考虑到用户体验，我们不能允许长时间的页面加载，异步可以很好的解决这个问题，事件循环是异步的底层原理。</p>
-<hr>
-        
-          <a class="article-more-a" href="/2018/12/08/我了解的JavaScript运行机制-2/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/08/我了解的JavaScript运行机制-2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-我了解的JavaScript运行机制-1" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/07/我了解的JavaScript运行机制-1/">我了解的JavaScript运行机制-1（闭包，作用域链）</a>
-    </h1>
   
 
-        
-        <a href="/2018/12/07/我了解的JavaScript运行机制-1/" class="archive-article-date">
-  	<time datetime="2018-12-07T11:50:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p>首先，明确一个概念，作用域：编程语言中函数与变量的可访问范围<br>编程语言中的作用域有两种：词法作用域与动态作用域。</p>
-<ul>
-<li>词法作用域:这种作用域的访问范围在编译之时就被确定了，不会因为执行环境的改变而改变，因此词法作用域也叫做静态作用域，JavaScript就使用这种作用域。</li>
-<li>动态作用域：动态作用域的访问范围由执行的环境决定。</li>
-</ul>
-<hr>
-<h3 id="JavaScript中作用域的分类"><a href="#JavaScript中作用域的分类" class="headerlink" title="JavaScript中作用域的分类"></a>JavaScript中作用域的分类</h3><p>全局作用域，局部作用域（函数作用域），es6之后可以使用let或者const构建块级作用域</p>
-<hr>
-        
-          <a class="article-more-a" href="/2018/12/07/我了解的JavaScript运行机制-1/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/07/我了解的JavaScript运行机制-1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-我的第一篇博客" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/06/我的第一篇博客/">我的第一篇博客</a>
-    </h1>
   
 
-        
-        <a href="/2018/12/06/我的第一篇博客/" class="archive-article-date">
-  	<time datetime="2018-12-06T11:08:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="关于博客"><a href="#关于博客" class="headerlink" title="关于博客"></a>关于博客</h2><p>一直都想有一个独立的空间用来写一些技术总结和随笔，允许的话还想放一些照片。想了几个方案：个人网站，csdn博客，知乎文章以及微信公众号等，考虑再三，最后决定采用个人网站的方案。本人大学本科非计算机专业，后转行做了前端，技术方面也没有涉及数据库，后端语言（了解）以及服务器相关的领域（不赘言的话就是菜鸡）。因此个人博客采用githubPage托管，使用hexo进行文章管理，因此不存在前后台交互相关的业务，后续个人技术允许再添加相关功能。博客的界面使用hexo主题。文章编辑使用markdown语言。后续可能会添加一篇博客阐述个人博客网站的搭建流程以及相关问题的解决方案。</p>
-        
-          <a class="article-more-a" href="/2018/12/06/我的第一篇博客/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/06/我的第一篇博客/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-记于布莱恩特先生离开前35天" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/06/记于布莱恩特先生离开前35天/">记于布莱恩特先生离开前35天</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/06/记于布莱恩特先生离开前35天/" class="archive-article-date">
-  	<time datetime="2018-12-06T09:21:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>曾经为了一个很小的意愿去读了读后三国的历史，为了一个叫做姜维的人，只是为了去了解他。</p>
-<p>一个人，他究竟执着到何种程度，才可以在如此漫长的时间里，在如此狭窄的夹缝中，在如此难以逆转的情势下，一次又一次的冲击宿命？</p>
-        
-          <a class="article-more-a" href="/2018/12/06/记于布莱恩特先生离开前35天/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/06/记于布莱恩特先生离开前35天/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -494,8 +241,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
