@@ -16,7 +16,7 @@
 <meta property="og:description" content="提要这里只谈JavaScript在浏览器环境中的事件循环（Event Loop），不涉及Nodejs环境的情况。首先，JavaScript是一门单线程语言。单线程，顾名思义，就意味着代码的执行是由上而下顺序执行的，也就是说只能是一个任务执行完毕之后，随后的任务才可以接着执行。考虑到Javascript是一门浏览器脚本语言，因此前者只能是单线程的。伴随着单线程接踵而至的就是堵塞问题，因为难免有一些任">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://image-static.segmentfault.com/402/025/4020255170-59bc9e1671029_articlex">
-<meta property="og:updated_time" content="2018-12-13T01:16:19.843Z">
+<meta property="og:updated_time" content="2018-12-19T03:30:28.971Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我了解的JavaScript运行机制-2（异步与事件循环）">
 <meta name="twitter:description" content="提要这里只谈JavaScript在浏览器环境中的事件循环（Event Loop），不涉及Nodejs环境的情况。首先，JavaScript是一门单线程语言。单线程，顾名思义，就意味着代码的执行是由上而下顺序执行的，也就是说只能是一个任务执行完毕之后，随后的任务才可以接着执行。考虑到Javascript是一门浏览器脚本语言，因此前者只能是单线程的。伴随着单线程接踵而至的就是堵塞问题，因为难免有一些任">
@@ -174,7 +174,7 @@
 <p>首先，任务队列中的异步任务的回调函数执行顺序由它们任务的就绪时间点决决定。Javascript中的常见的异步任务构建方法除上述的setTimeout外，还有setInterval，promise，async等（angular相关的rxjs的observe）。如上所示，我们假设这些异步回调消耗额外的时间就可以就绪，那么异步任务的执行顺序是按代码执行顺序还是另有文章？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">script start</span><br><span class="line">async1 start</span><br><span class="line">async2</span><br><span class="line">promise1</span><br><span class="line">script end</span><br><span class="line">async1 end</span><br><span class="line">promise2</span><br><span class="line">settimeout</span><br></pre></td></tr></table></figure></p>
 <p>开始分析：<br>首先是同步任务：毫无疑问，首先打印’script start’。然后是async1函数执行，这是一个异步函数，但是异步函数的执行过程仍属于同步任务范围，所以打印’async1 start’。在异步函数async1执行过程中，’await async2()’意味着要等待async2的return（类似于promise的then），毫无疑问，async2被调用了，因此打印async2。继续主线程，创建promise的过程打印’promise1’。紧接着是同步任务最后的’script end’。<br>然后是异步任务：首先要指出的是：async的return在本质上无异于promise的resolve。因此就只要讨论promise的then（async的await）与setTimeout(fn,0)的先后顺序即可得出结论。从结果来看很明显setTimeout在then与await之后。因此可以得出<strong>表面的结论</strong>：在无额外消耗的情况下，setTimeout(fn,0)的执行顺序在promise回调之后。</p>
 <p>setTimeouot的真正执行时间分析：</p>
-<p>在阮某某的文章中这样描述这个过程：</p>
+<p>在阮老师的文章中这样描述这个过程：</p>
 <blockquote>
 <p>总之，setTimeout(fn,0)的含义是，指定某个任务在主线程最早可得的空闲时间执行，也就是说，尽可能早得执行。它在”任务队列”的尾部添加一个事件，因此要等到同步任务和”任务队列”现有的事件都处理完，才会得到执行。<br>HTML5标准规定了setTimeout()的第二个参数的最小值（最短间隔），不得低于4毫秒，如果低于这个值，就会自动增加。在此之前，老版本的浏览器都将最短间隔设为10毫秒。另外，对于那些DOM的变动（尤其是涉及页面重新渲染的部分），通常不会立即执行，而是每16毫秒执行一次。这时使用requestAnimationFrame()的效果要好于setTimeout()。<br>需要注意的是，setTimeout()只是将事件插入了”任务队列”，必须等到当前代码（执行栈）执行完，主线程才会去执行它指定的回调函数。要是当前代码耗时很长，有可能要等很久，所以并没有办法保证，回调函数一定会在setTimeout()指定的时间执行。</p>
 </blockquote>
@@ -182,14 +182,13 @@
 <p>文中指出：<strong>它（setTimeout(fn,0)）在”任务队列”的尾部添加一个事件，因此要等到同步任务和”任务队列”现有的事件都处理完，才会得到执行。</strong>在上方代码中，主线程执行到setTimeout(fn,0)时，事件队列中可能只有异步函数async2()已经就绪，其他的异步任务都没还有就绪。我们可以试着用4ms来解释它，也就是说setTimeout(fn,0)的异步任务就绪至少需要4ms，在这段时间里，其他异步任务已经就绪，因此它在事件队列最后，这几乎可以解释一切。</p>
 <hr>
 <h2 id="事件队列分类"><a href="#事件队列分类" class="headerlink" title="事件队列分类"></a>事件队列分类</h2><blockquote>
-<p>宏任务队列：script（全局任务）, setTimeout, setInterval, setImmediate, I/O, UI rendering.<br>微任务队列：process.nextTick, Promise, Object.observer, MutationObserver.<br>从引用内容看，全局任务， setTimeout, setInterval, setImmediate（Nodejs函数），I/O（用户交互），UI rendering（页面渲染）属于宏任务。而process.nextTick（Nodejs函数）, Promise, Object.observer, MutationObserver的回调等属于微任务。</p>
+<p>宏任务队列：script（全局任务）, setTimeout, setInterval, setImmediate, I/O, UI rendering, 网络请求Ajax<br>微任务队列：process.nextTick, Promise, Object.observer, MutationObserver<br>从引用内容看，全局任务， setTimeout, setInterval, setImmediate（Nodejs函数），I/O（用户交互），UI rendering（页面渲染）属于宏任务。而process.nextTick（Nodejs函数）, Promise, Object.observer, MutationObserver的回调等属于微任务。</p>
 <ol>
 <li>取一个宏任务来执行。执行完毕后，下一步。</li>
 <li>取一个微任务来执行，执行完毕后，再取一个微任务来执行。直到微任务队列为空，执行下一步。</li>
-<li>更新UI渲染。<br>Event Loop 会无限循环执行上面3步，这就是Event Loop的主要控制逻辑。其中，第3步（更新UI渲染）会根据浏览器的逻辑，决定要不要马上执行更新。毕竟更新UI成本大，所以，一般都会比较长的时间间隔，执行一次更新。<br><img src="https://image-static.segmentfault.com/402/025/4020255170-59bc9e1671029_articlex" alt="Javascript事件循环" title="宏任务与微任务"><br>由于setTimeout属宏任务，因此它一定在promise回调之后，但是如果promise的resolve的就绪过程耗费了大量时间，甚至超过了清空（执行）微任务队列的时间，那么它的执行时间就会被延后至下次宏任务后，以此类推。</li>
+<li>更新UI渲染。<br>Event Loop 会无限循环执行上面3步，这就是Event Loop的主要控制逻辑。其中，第3步（更新UI渲染）会根据浏览器的逻辑，决定要不要马上执行更新。毕竟更新UI成本大，所以，一般都会比较长的时间间隔，执行一次更新。<br><img src="https://image-static.segmentfault.com/402/025/4020255170-59bc9e1671029_articlex" alt="Javascript事件循环" title="宏任务与微任务"><br>由于setTimeout属宏任务，因此它一定在promise回调之后。</li>
 </ol>
 </blockquote>
-<hr>
 <p><a href="https://segmentfault.com/a/1190000011198232" target="_blank" rel="noopener">事件队列分类引用链接点我</a><br>仅个人理解与引用，如有错误，日后完善。</p>
 
       
