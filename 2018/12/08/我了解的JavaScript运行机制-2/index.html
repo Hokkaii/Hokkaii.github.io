@@ -16,7 +16,7 @@
 <meta property="og:description" content="提要这里只谈JavaScript在浏览器环境中的事件循环（Event Loop），不涉及Nodejs环境的情况。首先，JavaScript是一门单线程语言。单线程，顾名思义，就意味着代码的执行是由上而下顺序执行的，也就是说只能是一个任务执行完毕之后，随后的任务才可以接着执行。考虑到Javascript是一门浏览器脚本语言，因此前者只能是单线程的。伴随着单线程接踵而至的就是堵塞问题，因为难免有一些任">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://image-static.segmentfault.com/402/025/4020255170-59bc9e1671029_articlex">
-<meta property="og:updated_time" content="2018-12-19T03:30:28.971Z">
+<meta property="og:updated_time" content="2018-12-21T09:09:09.289Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我了解的JavaScript运行机制-2（异步与事件循环）">
 <meta name="twitter:description" content="提要这里只谈JavaScript在浏览器环境中的事件循环（Event Loop），不涉及Nodejs环境的情况。首先，JavaScript是一门单线程语言。单线程，顾名思义，就意味着代码的执行是由上而下顺序执行的，也就是说只能是一个任务执行完毕之后，随后的任务才可以接着执行。考虑到Javascript是一门浏览器脚本语言，因此前者只能是单线程的。伴随着单线程接踵而至的就是堵塞问题，因为难免有一些任">
@@ -182,7 +182,7 @@
 <p>文中指出：<strong>它（setTimeout(fn,0)）在”任务队列”的尾部添加一个事件，因此要等到同步任务和”任务队列”现有的事件都处理完，才会得到执行。</strong>在上方代码中，主线程执行到setTimeout(fn,0)时，事件队列中可能只有异步函数async2()已经就绪，其他的异步任务都没还有就绪。我们可以试着用4ms来解释它，也就是说setTimeout(fn,0)的异步任务就绪至少需要4ms，在这段时间里，其他异步任务已经就绪，因此它在事件队列最后，这几乎可以解释一切。</p>
 <hr>
 <h2 id="事件队列分类"><a href="#事件队列分类" class="headerlink" title="事件队列分类"></a>事件队列分类</h2><blockquote>
-<p>宏任务队列：script（全局任务）, setTimeout, setInterval, setImmediate, I/O, UI rendering, 网络请求Ajax<br>微任务队列：process.nextTick, Promise, Object.observer, MutationObserver<br>从引用内容看，全局任务， setTimeout, setInterval, setImmediate（Nodejs函数），I/O（用户交互），UI rendering（页面渲染）属于宏任务。而process.nextTick（Nodejs函数）, Promise, Object.observer, MutationObserver的回调等属于微任务。</p>
+<p>宏任务队列：script（全局任务）, setTimeout, setInterval, setImmediate, I/O, UI rendering, 网络请求Ajax<br>微任务队列：process.nextTick, Promise, Object.observer, MutationObserver</p>
 <ol>
 <li>取一个宏任务来执行。执行完毕后，下一步。</li>
 <li>取一个微任务来执行，执行完毕后，再取一个微任务来执行。直到微任务队列为空，执行下一步。</li>
