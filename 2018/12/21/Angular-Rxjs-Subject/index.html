@@ -6,18 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Angular Rxjs-Subject | Hokkaii的博客</title>
+  <title>Angular RxJS-Observable-Observer-Subject | Hokkaii的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="观察者模式观察者模式是JavaScript中一种经典的设计模式。具体实现是：一个目标对象管理所有依赖于它的所有观察者对象，并且在它自身发生变化的时候主动发出通知（前文异步编程方案一文中曾经使用这一设计模式解决异步编程问题）。在JavaScript中这一模式最常见的就是用户事件触发回调函数。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Angular Rxjs-Subject">
+<meta property="og:title" content="Angular RxJS-Observable-Observer-Subject">
 <meta property="og:url" content="http://yoursite.com/2018/12/21/Angular-Rxjs-Subject/index.html">
 <meta property="og:site_name" content="Hokkaii的博客">
 <meta property="og:description" content="观察者模式观察者模式是JavaScript中一种经典的设计模式。具体实现是：一个目标对象管理所有依赖于它的所有观察者对象，并且在它自身发生变化的时候主动发出通知（前文异步编程方案一文中曾经使用这一设计模式解决异步编程问题）。在JavaScript中这一模式最常见的就是用户事件触发回调函数。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-14T09:56:34.306Z">
+<meta property="og:updated_time" content="2019-02-14T10:00:26.585Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Angular Rxjs-Subject">
+<meta name="twitter:title" content="Angular RxJS-Observable-Observer-Subject">
 <meta name="twitter:description" content="观察者模式观察者模式是JavaScript中一种经典的设计模式。具体实现是：一个目标对象管理所有依赖于它的所有观察者对象，并且在它自身发生变化的时候主动发出通知（前文异步编程方案一文中曾经使用这一设计模式解决异步编程问题）。在JavaScript中这一模式最常见的就是用户事件触发回调函数。">
   
     <link rel="alternative" href="/atom.xml" title="Hokkaii的博客" type="application/atom+xml">
@@ -149,7 +149,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Angular Rxjs-Subject
+      Angular RxJS-Observable-Observer-Subject
     </h1>
   
 
@@ -173,7 +173,7 @@
 <hr>
 <h2 id="RxJS"><a href="#RxJS" class="headerlink" title="RxJS"></a>RxJS</h2><p>RxJS 是基于观察者模式和迭代器模式以函数式编程思维来实现的。RxJS 中含有两个基本概念：Observables 与 Observer。Observables 作为被观察者，是一个值或事件的流集合；而 Observer 则作为观察者，根据 Observables 进行处理。即 <strong>观察者以迭代器模式来订阅发布者主动发布的数据</strong>。</p>
 <hr>
-<h2 id="Observable与observer"><a href="#Observable与observer" class="headerlink" title="Observable与observer"></a>Observable与observer</h2><p>Observable 作为被观察者，是一个值或事件的流集合；而 Observer 则作为观察者，根据 Observable进行处理。</p>
+<h2 id="Observable与Observer"><a href="#Observable与Observer" class="headerlink" title="Observable与Observer"></a>Observable与Observer</h2><p>Observable 作为被观察者，是一个值或事件的流集合；而 Observer 则作为观察者，根据 Observable进行处理。</p>
 <p>最简单的手写一个observable的实现：</p>
 <h3 id="DataSource-数据源"><a href="#DataSource-数据源" class="headerlink" title="DataSource - 数据源"></a>DataSource - 数据源</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class DataSource &#123;</span><br><span class="line"></span><br><span class="line">    constructor() &#123;</span><br><span class="line">        let i = 0;</span><br><span class="line">        this._id = setInterval(() =&gt; this.emit(i++), 200); // 创建定时器</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    emit(n) &#123;</span><br><span class="line">        const limit = 10;  // 设置数据上限值</span><br><span class="line">        if (this.ondata) &#123;</span><br><span class="line">            this.ondata(n);</span><br><span class="line">        &#125;</span><br><span class="line">        if (n === limit) &#123;</span><br><span class="line">            if (this.oncomplete) &#123;</span><br><span class="line">                this.oncomplete();</span><br><span class="line">            &#125;</span><br><span class="line">            this.destroy();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    destroy() &#123; // 清除定时器</span><br><span class="line">        clearInterval(this._id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="myObservable"><a href="#myObservable" class="headerlink" title="myObservable"></a>myObservable</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function myObservable(observer) &#123;</span><br><span class="line">    let datasource = new DataSource(); // 创建数据源</span><br><span class="line">    datasource.ondata = (e) =&gt; observer.next(e); // 处理数据流</span><br><span class="line">    datasource.onerror = (err) =&gt; observer.error(err); // 处理异常</span><br><span class="line">    datasource.oncomplete = () =&gt; observer.complete(); // 处理数据流终止</span><br><span class="line">    return () =&gt; &#123; // 返回一个函数用于，销毁数据源</span><br><span class="line">        datasource.destroy();</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
