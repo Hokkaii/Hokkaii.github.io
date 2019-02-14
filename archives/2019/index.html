@@ -6,19 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>我了解的JavaScript运行机制-1（闭包，作用域链） | Hokkaii的博客</title>
+  <title>Archives: 2019 | Hokkaii的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="作用域首先，明确一个概念，作用域：编程语言中函数与变量的可访问范围编程语言中的作用域有两种：词法作用域与动态作用域。  词法作用域:这种作用域的访问范围在编译之时就被确定了，不会因为执行环境的改变而改变，因此词法作用域也叫做静态作用域，JavaScript就使用这种作用域。 动态作用域：动态作用域的访问范围由执行的环境决定。   JavaScript中作用域的分类全局作用域，局部作用域（函数作用域">
-<meta property="og:type" content="article">
-<meta property="og:title" content="我了解的JavaScript运行机制-1（闭包，作用域链）">
-<meta property="og:url" content="http://yoursite.com/2018/12/07/我了解的JavaScript运行机制-1/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hokkaii的博客">
+<meta property="og:url" content="http://yoursite.com/archives/2019/index.html">
 <meta property="og:site_name" content="Hokkaii的博客">
-<meta property="og:description" content="作用域首先，明确一个概念，作用域：编程语言中函数与变量的可访问范围编程语言中的作用域有两种：词法作用域与动态作用域。  词法作用域:这种作用域的访问范围在编译之时就被确定了，不会因为执行环境的改变而改变，因此词法作用域也叫做静态作用域，JavaScript就使用这种作用域。 动态作用域：动态作用域的访问范围由执行的环境决定。   JavaScript中作用域的分类全局作用域，局部作用域（函数作用域">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-17T01:42:16.035Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我了解的JavaScript运行机制-1（闭包，作用域链）">
-<meta name="twitter:description" content="作用域首先，明确一个概念，作用域：编程语言中函数与变量的可访问范围编程语言中的作用域有两种：词法作用域与动态作用域。  词法作用域:这种作用域的访问范围在编译之时就被确定了，不会因为执行环境的改变而改变，因此词法作用域也叫做静态作用域，JavaScript就使用这种作用域。 动态作用域：动态作用域的访问范围由执行的环境决定。   JavaScript中作用域的分类全局作用域，局部作用域（函数作用域">
+<meta name="twitter:title" content="Hokkaii的博客">
   
     <link rel="alternative" href="/atom.xml" title="Hokkaii的博客" type="application/atom+xml">
   
@@ -142,133 +138,49 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-我了解的JavaScript运行机制-1" class="article article-type-post " itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      我了解的JavaScript运行机制-1（闭包，作用域链）
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/02/11/angular-修饰器总结/" class="archive-article-date">
+  	<time datetime="2019-02-11T06:48:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-11</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/02/11/angular-修饰器总结/">angular 修饰器总结</a>
     </h1>
   
 
-        
-        <a href="/2018/12/07/我了解的JavaScript运行机制-1/" class="archive-article-date">
-  	<time datetime="2018-12-07T11:50:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p>首先，明确一个概念，作用域：编程语言中函数与变量的可访问范围<br>编程语言中的作用域有两种：词法作用域与动态作用域。</p>
-<ul>
-<li>词法作用域:这种作用域的访问范围在编译之时就被确定了，不会因为执行环境的改变而改变，因此词法作用域也叫做静态作用域，JavaScript就使用这种作用域。</li>
-<li>动态作用域：动态作用域的访问范围由执行的环境决定。</li>
-</ul>
-<hr>
-<h3 id="JavaScript中作用域的分类"><a href="#JavaScript中作用域的分类" class="headerlink" title="JavaScript中作用域的分类"></a>JavaScript中作用域的分类</h3><p>全局作用域，局部作用域（函数作用域），es6之后可以使用let或者const构建块级作用域</p>
-<hr>
-<a id="more"></a>
-<h2 id="执行上下文栈"><a href="#执行上下文栈" class="headerlink" title="执行上下文栈"></a>执行上下文栈</h2><p>在js执行的线程之内，每当转入到一段可以被执行的代码段，就会进入一个执行上下文，js中的可执行代码块分为全局代码以及函数代码。全局代码在script标签被编译后便开始执行，而函数代码的执行要等到函数被激活之时。仔细考虑这个过程：<br>我们可以把所有上下文的集合理解为一个栈–执行上下文栈，当全局代码执行时，全局上下文首先被压入这个栈。待到函数执行之时，那么函数的执行上下文也会被从顶部压入这个栈。待到函数执行完毕之时，那么这个函数的执行上下文就会被弹出，以此类推（全局上下文永远在这个栈的底部）。<br>在这里，我们要考虑这一种特殊情况：<br>函数在执行过程中调用了其他函数。我们称执行函数为caller，被调用的函数为callee；在caller调用了callee之后（也可以称这个过程是一个执行上下文触发了另一个执行上下文），caller会暂缓自身的执行（在这个时间点，执行上下文栈被压入callee的上下文），转而等待callee的执行，在callee执行完毕之后，caller再去完成自身的流程，最后函数执行完毕（return），函数上下文被弹出。</p>
-<hr>
-<h2 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h2><p>执行上下文的组成：<br>变量对象(variable object)，this指针(this value)，作用域链(scope chain)</p>
-<hr>
-<h2 id="变量对象，活动对象，全局对象"><a href="#变量对象，活动对象，全局对象" class="headerlink" title="变量对象，活动对象，全局对象"></a>变量对象，活动对象，全局对象</h2><ul>
-<li>变量对象（Variable Object）变量对象(variable object) 是与执行上下文相关的数据作用域(scope of data) 。它是与上下文关联的特殊对象，用于存储被定义在上下文中的 变量(variables) 和 函数声明(function declarations) 。变量对象不能被直接访问，这一情况在全局上下文中有例外，因为全局对象本身就是变量对象。</li>
-<li>全局对象(Global object)：全局对象(Global object) 是在进入任何执行上下文之前就已经创建了的对象；这个对象只存在一份，它的属性在程序中任何地方都可以访问，全局对象的生命周期终止于程序退出那一刻。全局对象初始创建阶段将Math、String、Date、parseInt作为自身属性初始化，同样也可以有额外创建的其它对象作为属性（其可以指向到全局对象自身），全局对象本身就是变量对象。</li>
-<li>活动对象（activation object）：在函数被调用之时，会生成一个函数上下文，函数的上下文的活动对象会被作为变量对象使用，除函数作用域的变量声明和函数声明外，它还囊括了arguments对象。</li>
-</ul>
-<hr>
-<h2 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h2><p>作用域链存在于执行上下文中，作用域链与一个执行上下文相关，变量对象的链用于在标识符解析中变量查找，作用域链大多数与内部函数相关。<br>在了解作用域链之前，先明确函数属性[[scope]]的概念:</p>
-<h3 id="scope"><a href="#scope" class="headerlink" title="[[scope]]"></a>[[scope]]</h3><p><strong>[[scope]]就是函数的作用域</strong>。[[scope]]是一个在函数被创建之时就存在于函数中的属性，JavaScript使用者无法获取到这个属性，但它的的确确是真实存在的。函数存在，函数对应的[[scope]]便存在。<br>因此[[scope]]的定义可以被这样陈述：[[scope]]是所有父变量对象的层级链，处于执行上下文中，被创建于函数被创建之时。由此可以了解为什么子作用域可以访问父作用域，而反之不可。<br>作用域链是函数的活动对象与自身的[[scope]]结合体，这种结合的方式可以被理解为数组的concat方法。</p>
-<blockquote>
-<p>到这里，我们可以清晰的得到一个类似于Javascript原型链的作用域链的概念：全局代码执行伊始，产生全局上下文，全局上下文中存在全局对象，在某个函数被声明之时，它的[[scope]]属性便包含了全局变量对象，这个函数被激活之时便产生了函数自身的执行上下文，函数执行上下文的作用域链由自身的[[scope]]以及函数活动对象组成，因此函数作用域链包含所有的父变量对象以及自身的活动对象，在发现每个变量不存在于自身的活动对象中，便会向上沿这条作用域链进行查找，因此对于这个函数来说自身活动对象中的属性（局部变量）被取到的优先级高于父变量对象中的属性（外部变量）。</p>
-</blockquote>
-<hr>
-<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>闭包有三个基本特征：外部函数包含内部函数，内部函数使用了外部函数的变量，外部函数最终返回了内部函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function foo() &#123;</span><br><span class="line">var x = 10;</span><br><span class="line">return function bar() &#123;</span><br><span class="line">    console.log(x);</span><br><span class="line">&#125;;</span><br><span class="line">&#125;</span><br><span class="line">var returnedFunction = foo();</span><br></pre></td></tr></table></figure></p>
-<p>我们称bar函数为闭包。<br>现在以更加底层的思想分析闭包：首先，我们确定闭包形成行成的先决条件：编程语言使用词法作用域，在此条件的基础之上，函数的[[scope]]属性在创建之初便被确定，而且不会被改变。</p>
-<p>再看：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hexo</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">data[0](); // 3</span><br><span class="line">data[1](); // 3</span><br><span class="line">data[2](); // 3</span><br></pre></td></tr></table></figure></p>
-<p>因为通过for语句使用var来声明了一个全局变量，因此for语句的{}中的所有函数公用一个[[scope]]，[[scope]]构成了函数执行时的作用域链，因此结果都是3，这与我们的预期结果不符。<br>解决方案是：</p>
-<ul>
-<li>使用立即执行函数来构建一个执行上下文<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var data = [];</span><br><span class="line">for (var k = 0; k &lt; 3; k++) &#123;</span><br><span class="line">  data[k] = (function(x)&#123;</span><br><span class="line">      return function () &#123;</span><br><span class="line">      console.log(x);</span><br><span class="line">    &#125;; </span><br><span class="line">  &#125;)(k)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>这样利用立即执行函数构建一个独立的上下文，每个立即执行函数的[[scope]]互不干扰，因此其作用域链也不会受影响，我们就可以得到理想结果。</p>
-<ul>
-<li>使用const或者let声明一个块级作用域，在这里块级作用域也会产生变量对象，因此下边代码块级作用域内部声明的不同函数的[[scope]]是不同的，互不影响。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var data = [];</span><br><span class="line">for (let k = 0; k &lt; 3; k++) &#123;</span><br><span class="line">  data[k] = function () &#123;</span><br><span class="line">    console.log(k);</span><br><span class="line">  &#125;; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>const与let可以构建块级作用域。<br>在for语句内使用let或者const声明的变量会构建块级作用域。因此每个函数的[[scope]]不再互相共享，不会互相影响，我们就可以得到理想结果。</p>
-<p>因此闭包的概念可以这样被陈述：<strong>由于JavaScript使用词法作用域；函数的[[scope]]在函数被创建之时便存在于函数中，且不会随着执行环境的改变而改变（这并不意味[[scope]]是一成不变），所以函数不被销毁，它便存在。内部函数被调用时，[[scope]]和活动对象一起构建成作用域链，用于变量查找</strong></p>
-<hr>
+        <div class="article-info info-on-right">
+          
+          
 
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2018/12/08/我了解的JavaScript运行机制-2/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          我了解的JavaScript运行机制-2（异步与事件循环）
-        
-      </div>
-    </a>
   
   
-    <a href="/2018/12/06/我的第一篇博客/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">我的第一篇博客</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -291,8 +203,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
