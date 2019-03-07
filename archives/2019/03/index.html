@@ -6,21 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>使用NgRx/Store对Angular项目进行状态管理 | Hokkaii的博客</title>
+  <title>Archives: 2019/3 | Hokkaii的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="提要前端状态管理是很多流行框架统一在做的事。不同的前端框架有不同的处理方案，这里总结在Angular2中使用NgRx/Store进行状态管理。 代码来解析流程actions文件夹中的article.actions.ts文件：12345678910111213141516import &amp;#123; Action &amp;#125; from &amp;apos;@ngrx/store&amp;apos;; // Acti">
-<meta property="og:type" content="article">
-<meta property="og:title" content="使用NgRx&#x2F;Store对Angular项目进行状态管理">
-<meta property="og:url" content="http://yoursite.com/2019/02/18/使用NgRx-Store对Angular项目进行状态管理/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hokkaii的博客">
+<meta property="og:url" content="http://yoursite.com/archives/2019/03/index.html">
 <meta property="og:site_name" content="Hokkaii的博客">
-<meta property="og:description" content="提要前端状态管理是很多流行框架统一在做的事。不同的前端框架有不同的处理方案，这里总结在Angular2中使用NgRx/Store进行状态管理。 代码来解析流程actions文件夹中的article.actions.ts文件：12345678910111213141516import &amp;#123; Action &amp;#125; from &amp;apos;@ngrx/store&amp;apos;; // Acti">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/02/18/assets/img/reducer.jpg">
-<meta property="og:updated_time" content="2019-02-21T08:50:19.698Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用NgRx&#x2F;Store对Angular项目进行状态管理">
-<meta name="twitter:description" content="提要前端状态管理是很多流行框架统一在做的事。不同的前端框架有不同的处理方案，这里总结在Angular2中使用NgRx/Store进行状态管理。 代码来解析流程actions文件夹中的article.actions.ts文件：12345678910111213141516import &amp;#123; Action &amp;#125; from &amp;apos;@ngrx/store&amp;apos;; // Acti">
-<meta name="twitter:image" content="http://yoursite.com/2019/02/18/assets/img/reducer.jpg">
+<meta name="twitter:title" content="Hokkaii的博客">
   
     <link rel="alternative" href="/atom.xml" title="Hokkaii的博客" type="application/atom+xml">
   
@@ -144,105 +138,49 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-使用NgRx-Store对Angular项目进行状态管理" class="article article-type-post " itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      使用NgRx/Store对Angular项目进行状态管理
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/03/07/前端路由的简单介绍/" class="archive-article-date">
+  	<time datetime="2019-03-07T01:59:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-07</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/03/07/前端路由的简单介绍/">前端路由的简单介绍</a>
     </h1>
   
 
-        
-        <a href="/2019/02/18/使用NgRx-Store对Angular项目进行状态管理/" class="archive-article-date">
-  	<time datetime="2019-02-18T09:48:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="提要"><a href="#提要" class="headerlink" title="提要"></a>提要</h2><p>前端状态管理是很多流行框架统一在做的事。不同的前端框架有不同的处理方案，这里总结在Angular2中使用NgRx/Store进行状态管理。</p>
-<h2 id="代码来解析流程"><a href="#代码来解析流程" class="headerlink" title="代码来解析流程"></a>代码来解析流程</h2><p><img src="../assets/img/reducer.jpg" alt="文件结构：" title="文件结构"><br>actions文件夹中的article.actions.ts文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Action &#125; from &apos;@ngrx/store&apos;; // Action是状态的改变。它描述了某个事件的发生，但是没有指定应用的状态如何改变。</span><br><span class="line">import &#123; Article &#125; from &apos;../models/article&apos;;</span><br><span class="line">export const JAVA = &apos;Java&apos;;</span><br><span class="line">export const ANGULAR = &apos;Angular&apos;;</span><br><span class="line">export const MY_ARTICLES = &apos;Favorite_Articles&apos;;</span><br><span class="line">export class JavaArticlesAction implements Action &#123;</span><br><span class="line">    readonly type = JAVA;</span><br><span class="line">&#125;</span><br><span class="line">export class AngularArticlesAction implements Action &#123;</span><br><span class="line">    readonly type = ANGULAR;</span><br><span class="line">&#125;</span><br><span class="line">export class FavoriteArticlesAction implements Action &#123;</span><br><span class="line">    readonly type = MY_ARTICLES;</span><br><span class="line">    constructor(public payload: Article[]) &#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line">export type All = JavaArticlesAction | AngularArticlesAction | FavoriteArticlesAction;</span><br></pre></td></tr></table></figure></p>
-<p>这个文件的主要作用是最使用几个类Action接口声明的type属性做一个实现，然后把这个几个类暴露出去。</p>
-<hr>
-<p>再看models文件夹的article.ts的文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// 数据结构</span><br><span class="line">export interface Article &#123;</span><br><span class="line">    id: number;</span><br><span class="line">    title: string;</span><br><span class="line">    category: string;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export const JAVA_ARTICLES: Article[] = [</span><br><span class="line">    &#123; id: 1, title: &apos;Java Article 1&apos;, category: &apos;Java&apos; &#125;,</span><br><span class="line">    &#123; id: 2, title: &apos;Java Article 2&apos;, category: &apos;Java&apos; &#125;,</span><br><span class="line">];</span><br><span class="line">export const ANGULAR_ARTICLES: Article[] = [</span><br><span class="line">    &#123; id: 1, title: &apos;Angular Article 1&apos;, category: &apos;Angular&apos; &#125;,</span><br><span class="line">    &#123; id: 2, title: &apos;Angular Article 2&apos;, category: &apos;Angular&apos; &#125;,</span><br><span class="line">];</span><br><span class="line">export const FAVORITE_ARTICLES: Article[] = [</span><br><span class="line">    &#123; id: 1, title: &apos;Java Article 1&apos;, category: &apos;Java&apos; &#125;,</span><br><span class="line">    &#123; id: 2, title: &apos;Angular Article 2&apos;, category: &apos;Angular&apos; &#125;</span><br><span class="line">];</span><br></pre></td></tr></table></figure></p>
-<p>这个文件的主要作用是声明几个变量，规定他们的类型，再把他们暴露出去以供使用。</p>
-<hr>
-<p>reducers文件夹的app.states.ts文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 规定数据结构</span><br><span class="line">import &#123; Article &#125; from &apos;../models/article&apos;;</span><br><span class="line"></span><br><span class="line">export interface AppState &#123;</span><br><span class="line">    articleState: ArticleState;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export interface ArticleState &#123;</span><br><span class="line">    articles: Article[];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>暴露出两个接口规定数据类型：ArticleState与AppState。 </p>
-<hr>
-<p>reducers文件夹的article.reducer.ts文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">// 调节store的功能以及状态</span><br><span class="line">import &#123; createFeatureSelector, createSelector &#125; from &apos;@ngrx/store&apos;;</span><br><span class="line">// createFeatureSelector: 它为状态（state）创建一个feature selector。</span><br><span class="line">// createSelector: 它创建一个selector用于生成一个指定的状态;。</span><br><span class="line">import * as fromActions from &apos;../actions/article.actions&apos;;</span><br><span class="line">import &#123; JAVA_ARTICLES, ANGULAR_ARTICLES &#125; from &apos;../models/article&apos;;</span><br><span class="line">import &#123; ArticleState &#125; from &apos;./app.states&apos;;</span><br><span class="line"></span><br><span class="line">export const initialState: ArticleState = &#123; articles: [] &#125;;</span><br><span class="line">export function reducer(state = initialState, action: fromActions.All): ArticleState &#123;</span><br><span class="line">    switch (action.type) &#123;</span><br><span class="line">        case fromActions.JAVA: &#123;</span><br><span class="line">            return &#123; articles: JAVA_ARTICLES &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        case fromActions.ANGULAR: &#123;</span><br><span class="line">            return &#123; articles: ANGULAR_ARTICLES &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        case fromActions.MY_ARTICLES: &#123;</span><br><span class="line">            return &#123; articles: action.payload &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        default: &#123;</span><br><span class="line">            return state;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export const getArticleState = createFeatureSelector&lt;ArticleState&gt;(&apos;articleState&apos;);</span><br><span class="line">// createFeatureSelector: 它为状态（state）创建一个feature selector。功能选择器</span><br><span class="line">export const getArticles = createSelector(getArticleState, (state: ArticleState) =&gt; state.articles);</span><br><span class="line">// createSelector: 它创建一个selector用于生成一个指定的状态。</span><br></pre></td></tr></table></figure></p>
-<p>我们认为整个状态管理存在多种状态类型，不同的状态类型又包含不同的状态。因此有createSelector方法来选择状态类型，有createSelector方法来为选中的状态类型选择状态。</p>
-<p>components文件夹用做状态变化的显示视图：<br>这里主要看article.component.ts文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Store &#125; from &apos;@ngrx/store&apos;;</span><br><span class="line">// Store: 它提供了Store.select()和Store.dispatch()来与reducer协同工作。Store.select()用于选择一个selector，Store.dispatch()用于向reducer分发action的类型。</span><br><span class="line">import &#123; Component &#125; from &apos;@angular/core&apos;;</span><br><span class="line">import &#123; Observable &#125; from &apos;rxjs&apos;;</span><br><span class="line">import * as articleReducer from &apos;../reducers/article.reducer&apos;;</span><br><span class="line">import * as fromActions from &apos;../actions/article.actions&apos;;</span><br><span class="line">import &#123; ArticleState &#125; from &apos;../reducers/app.states&apos;;</span><br><span class="line">import &#123; Article, FAVORITE_ARTICLES &#125; from &apos;../models/article&apos;;</span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">    selector: &apos;app-article&apos;,</span><br><span class="line">    templateUrl: &apos;article.component.html&apos;</span><br><span class="line">&#125;)</span><br><span class="line">export class ArticleComponent &#123;</span><br><span class="line">    articles: Observable&lt;Article[]&gt;;</span><br><span class="line"></span><br><span class="line">    constructor(private store: Store&lt;ArticleState&gt;) &#123;</span><br><span class="line">        this.articles = store.select(articleReducer.getArticles);</span><br><span class="line">    &#125;</span><br><span class="line">    showJavaArticles() &#123;</span><br><span class="line">        this.store.dispatch(new fromActions.JavaArticlesAction());</span><br><span class="line">    &#125;</span><br><span class="line">    showAngularArticles() &#123;</span><br><span class="line">        this.store.dispatch(new fromActions.AngularArticlesAction());</span><br><span class="line">    &#125;</span><br><span class="line">    showFavoriteArticles() &#123;</span><br><span class="line">        console.log(FAVORITE_ARTICLES);</span><br><span class="line">        this.store.dispatch(new fromActions.FavoriteArticlesAction(FAVORITE_ARTICLES));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <div class="article-info info-on-right">
+          
+          
 
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/03/07/前端路由的简单介绍/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          前端路由的简单介绍
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/02/14/Angular-Rxjs-Subject/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Angular RxJS-Observable-Observer-Subject</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -265,8 +203,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
