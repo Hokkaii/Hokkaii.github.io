@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Hokkaii的博客">
 <meta property="og:description" content="起源Ajax这项技术出现时要解决的问题就是实现网页的局部刷新。在Ajax出现之前，网页的构建是后端通过模板模板引擎构建，在浏览器发出请求时，服务器响应把数据发送至浏览器，浏览器解析显示。在用户进行交互的时候，后台再更新数据然后重新发送至浏览器。也就是说，用户的交互需要重新请求数据并渲染整个页面，这是十分不合理的。在这个时期，用户进行页面跳转操作的时候，后台要根据url响应对应的数据，然后前台再根据">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-07T06:16:46.727Z">
+<meta property="og:updated_time" content="2019-03-08T01:29:04.547Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端路由的简单介绍">
 <meta name="twitter:description" content="起源Ajax这项技术出现时要解决的问题就是实现网页的局部刷新。在Ajax出现之前，网页的构建是后端通过模板模板引擎构建，在浏览器发出请求时，服务器响应把数据发送至浏览器，浏览器解析显示。在用户进行交互的时候，后台再更新数据然后重新发送至浏览器。也就是说，用户的交互需要重新请求数据并渲染整个页面，这是十分不合理的。在这个时期，用户进行页面跳转操作的时候，后台要根据url响应对应的数据，然后前台再根据">
@@ -163,10 +163,11 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h2><p>Ajax这项技术出现时要解决的问题就是实现网页的局部刷新。在Ajax出现之前，网页的构建是后端通过模板模板引擎构建，在浏览器发出请求时，服务器响应把数据发送至浏览器，浏览器解析显示。在用户进行交互的时候，后台再更新数据然后重新发送至浏览器。也就是说，用户的交互需要重新请求数据并渲染整个页面，这是十分不合理的。在这个时期，用户进行页面跳转操作的时候，后台要根据url响应对应的数据，然后前台再根据这个数据重新渲染整个页面。为了改变这种一个请求对应一个页面的状况，Ajax应运而生，Ajax是一门用于页面局部响应刷新的技术，用户体验得到了很大的提升，但是页面跳转仍然会刷新整个页面（因为改变url会发送请求，服务端会响应网页数据，浏览器端依此刷新整个页面）。<br>前端路由就是由此而生：这也就是Spa（单页面应用），不仅页面交互而且页面跳转也都是无刷新的，它的核心在于如何改变url而不使浏览器向服务端发送请求。</p>
+<a id="more"></a>
 <hr>
 <h2 id="hash方案"><a href="#hash方案" class="headerlink" title="hash方案"></a>hash方案</h2><p>以<a href="https://www.hokkaii.com/这个网址为例，我希望用户跳转至https://www.hokkaii.com/blog的时候，浏览器不会向服务端发送请求（通常情况下如果直接修改网址是会发送请求的），最方便的解决方式就是https://www.hokkaii.com/#/blog。这里的#就是css中的#、锚点，用于定位到页面的某个元素，因此浏览器不会因为#之后的url变化去发送请求。并且在每次hash值变化的时候，会触发" target="_blank" rel="noopener">https://www.hokkaii.com/这个网址为例，我希望用户跳转至https://www.hokkaii.com/blog的时候，浏览器不会向服务端发送请求（通常情况下如果直接修改网址是会发送请求的），最方便的解决方式就是https://www.hokkaii.com/#/blog。这里的#就是css中的#、锚点，用于定位到页面的某个元素，因此浏览器不会因为#之后的url变化去发送请求。并且在每次hash值变化的时候，会触发</a> hashchange 这个事件，通过这个事件就可以知道hash值发生了哪些变化。<br>考虑：路由变化不再与后台关联，前台自身可以捕获路由和路由变化，因此前台路由完全可以由此搭建起来。</p>
 <hr>
-<h2 id="history方案"><a href="#history方案" class="headerlink" title="history方案"></a>history方案</h2><p>与hash方案不同的是，history方案不再需要一个#填充url中。pushState和replaceState是HTML5History新增的两个API，用这两个方法改变浏览器url可以阻止浏览器向服务端发送请求。<br>相比于hash方案，history方案有明显的优点：首先路由中不再有#符号，美观度提高；其次css中页面定位的东西被拿来用作处理路由本身就不太合适。<br>history方案也有自己的缺点：首先，上述的hash方案几乎可以应对用户一切的改变url的行为，只要你是在#之后操作，无论是页面内跳转改变url，还是手动输入url，亦或是使用浏览器按钮跳转改变url等，浏览器都不会向服务器发送请求。然而，单纯的依赖history方案的pushState和replaceState改变url却无法处理用户手动刷新页面以及手动输入url的情况，也是就说这两种情况浏览器还是会向服务端发送请求，这就需要服务端也要做相应的处理，在前述的两种情景下，服务端要返回一个特定的页面给前端，在vue中，这个文件通常是index.html（vue入口文件），然后再用vue的vue-router处理所有前端路由的情况。 </p>
+<h2 id="history方案"><a href="#history方案" class="headerlink" title="history方案"></a>history方案</h2><p>与hash方案不同的是，history方案不再需要一个#填充url中。pushState和replaceState是HTML5History新增的两个API，用这两个方法改变浏览器url可以阻止浏览器向服务端发送请求。<br>相比于hash方案，history方案有明显的优点：首先路由中不再有#符号，美观度提高；其次css中页面定位的东西被拿来用作处理路由本身就不太合适。<br>history方案也有自己的缺点：首先，上述的hash方案几乎可以应对用户一切的改变url的行为，只要你是在#之后操作，无论是页面内跳转改变url，还是手动输入url，亦或是使用浏览器按钮跳转改变url等，浏览器都不会向服务器发送请求。<br>然而，单纯的依赖history方案的pushState和replaceState改变url却无法处理用户手动刷新页面以及手动输入url的情况，也是就说这两种情况浏览器还是会向服务端发送请求，这就需要服务端也要做相应的处理，在前述的两种情景下，服务端要返回一个特定的页面给前端，在vue中，这个文件通常是index.html（vue入口文件），页面重新加载会触发load事件，在load事件中通过前端路由跳转至指定页面。用户在点击浏览器前进后退按钮时也要考虑：popstate事件的内置对象state会储存通过pushState和replaceState添加和改变的url，因此当前进和后退按钮从历史记录中找到某个url而这个这个url存在于state中，那么就会触发popstate事件，通过这个事件完成路由跳转。如果前进和后退按钮从历史记录中找到某个url不存在于state中，浏览器会像刷新页面那样向服务器发送请求，流程与刷新页面一致。</p>
 
       
 

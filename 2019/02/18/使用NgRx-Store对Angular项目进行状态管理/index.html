@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>使用NgRx/Store对Angular项目进行状态管理 | Hokkaii的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="提要前端状态管理是很多流行框架统一在做的事。不同的前端框架有不同的处理方案，这里总结在Angular2中使用NgRx/Store进行状态管理。 代码来解析流程actions文件夹中的article.actions.ts文件：12345678910111213141516import &amp;#123; Action &amp;#125; from &amp;apos;@ngrx/store&amp;apos;; // Acti">
+  <meta name="description" content="提要前端状态管理是很多流行框架统一在做的事。不同的前端框架有不同的处理方案，这里总结在Angular2中使用NgRx/Store进行状态管理。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用NgRx&#x2F;Store对Angular项目进行状态管理">
 <meta property="og:url" content="http://yoursite.com/2019/02/18/使用NgRx-Store对Angular项目进行状态管理/index.html">
 <meta property="og:site_name" content="Hokkaii的博客">
-<meta property="og:description" content="提要前端状态管理是很多流行框架统一在做的事。不同的前端框架有不同的处理方案，这里总结在Angular2中使用NgRx/Store进行状态管理。 代码来解析流程actions文件夹中的article.actions.ts文件：12345678910111213141516import &amp;#123; Action &amp;#125; from &amp;apos;@ngrx/store&amp;apos;; // Acti">
+<meta property="og:description" content="提要前端状态管理是很多流行框架统一在做的事。不同的前端框架有不同的处理方案，这里总结在Angular2中使用NgRx/Store进行状态管理。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/02/18/assets/img/reducer.jpg">
-<meta property="og:updated_time" content="2019-02-21T08:50:19.698Z">
+<meta property="og:updated_time" content="2019-03-08T01:29:06.423Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用NgRx&#x2F;Store对Angular项目进行状态管理">
-<meta name="twitter:description" content="提要前端状态管理是很多流行框架统一在做的事。不同的前端框架有不同的处理方案，这里总结在Angular2中使用NgRx/Store进行状态管理。 代码来解析流程actions文件夹中的article.actions.ts文件：12345678910111213141516import &amp;#123; Action &amp;#125; from &amp;apos;@ngrx/store&amp;apos;; // Acti">
+<meta name="twitter:description" content="提要前端状态管理是很多流行框架统一在做的事。不同的前端框架有不同的处理方案，这里总结在Angular2中使用NgRx/Store进行状态管理。">
 <meta name="twitter:image" content="http://yoursite.com/2019/02/18/assets/img/reducer.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hokkaii的博客" type="application/atom+xml">
@@ -164,7 +164,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="提要"><a href="#提要" class="headerlink" title="提要"></a>提要</h2><p>前端状态管理是很多流行框架统一在做的事。不同的前端框架有不同的处理方案，这里总结在Angular2中使用NgRx/Store进行状态管理。</p>
+        <h2 id="提要"><a href="#提要" class="headerlink" title="提要"></a>提要</h2><p>前端状态管理是很多流行框架统一在做的事。不同的前端框架有不同的处理方案，这里总结在Angular2中使用NgRx/Store进行状态管理。<br><a id="more"></a></p>
 <h2 id="代码来解析流程"><a href="#代码来解析流程" class="headerlink" title="代码来解析流程"></a>代码来解析流程</h2><p><img src="../assets/img/reducer.jpg" alt="文件结构：" title="文件结构"><br>actions文件夹中的article.actions.ts文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Action &#125; from &apos;@ngrx/store&apos;; // Action是状态的改变。它描述了某个事件的发生，但是没有指定应用的状态如何改变。</span><br><span class="line">import &#123; Article &#125; from &apos;../models/article&apos;;</span><br><span class="line">export const JAVA = &apos;Java&apos;;</span><br><span class="line">export const ANGULAR = &apos;Angular&apos;;</span><br><span class="line">export const MY_ARTICLES = &apos;Favorite_Articles&apos;;</span><br><span class="line">export class JavaArticlesAction implements Action &#123;</span><br><span class="line">    readonly type = JAVA;</span><br><span class="line">&#125;</span><br><span class="line">export class AngularArticlesAction implements Action &#123;</span><br><span class="line">    readonly type = ANGULAR;</span><br><span class="line">&#125;</span><br><span class="line">export class FavoriteArticlesAction implements Action &#123;</span><br><span class="line">    readonly type = MY_ARTICLES;</span><br><span class="line">    constructor(public payload: Article[]) &#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line">export type All = JavaArticlesAction | AngularArticlesAction | FavoriteArticlesAction;</span><br></pre></td></tr></table></figure></p>
 <p>这个文件的主要作用是最使用几个类Action接口声明的type属性做一个实现，然后把这个几个类暴露出去。</p>
 <hr>
