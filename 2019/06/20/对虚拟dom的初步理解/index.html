@@ -6,19 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>关于跨域 | Hokkaii的博客</title>
+  <title>对虚拟dom的初步理解 | Hokkaii的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="同源策略限制了从同一个源加载的文档或脚本如何与来自另一个源的资源进行交互。这是一个用于隔离潜在恶意文件的重要安全机制。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="关于跨域">
-<meta property="og:url" content="http://yoursite.com/2019/04/11/关于跨域/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="对虚拟dom的初步理解">
+<meta property="og:url" content="http://yoursite.com/2019/06/20/对虚拟dom的初步理解/index.html">
 <meta property="og:site_name" content="Hokkaii的博客">
-<meta property="og:description" content="同源策略限制了从同一个源加载的文档或脚本如何与来自另一个源的资源进行交互。这是一个用于隔离潜在恶意文件的重要安全机制。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-11T15:43:31.393Z">
+<meta property="og:updated_time" content="2019-07-09T07:40:58.664Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于跨域">
-<meta name="twitter:description" content="同源策略限制了从同一个源加载的文档或脚本如何与来自另一个源的资源进行交互。这是一个用于隔离潜在恶意文件的重要安全机制。">
+<meta name="twitter:title" content="对虚拟dom的初步理解">
   
     <link rel="alternative" href="/atom.xml" title="Hokkaii的博客" type="application/atom+xml">
   
@@ -142,29 +139,27 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-关于跨域" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-对虚拟dom的初步理解" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      关于跨域
+      对虚拟dom的初步理解
     </h1>
   
 
         
-        <a href="/2019/04/11/关于跨域/" class="archive-article-date">
-  	<time datetime="2019-04-11T15:38:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-11</time>
+        <a href="/2019/06/20/对虚拟dom的初步理解/" class="archive-article-date">
+  	<time datetime="2019-06-20T07:40:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>同源策略限制了从同一个源加载的文档或脚本如何与来自另一个源的资源进行交互。这是一个用于隔离潜在恶意文件的重要安全机制。</p>
-<a id="more"></a>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h2 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h2><h2 id="表单提交加iframe"><a href="#表单提交加iframe" class="headerlink" title="表单提交加iframe"></a>表单提交加iframe</h2><h2 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h2><h2 id="Nginx代理"><a href="#Nginx代理" class="headerlink" title="Nginx代理"></a>Nginx代理</h2><h2 id="Vue中的跨域方案"><a href="#Vue中的跨域方案" class="headerlink" title="Vue中的跨域方案"></a>Vue中的跨域方案</h2>
+        
       
 
       
@@ -185,18 +180,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/05/21/react学习/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          react学习
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/04/07/就一点/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">就一点</div>
+    <a href="/2019/05/21/react学习/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">react学习</div>
       <i class="icon-circle-right"></i>
     </a>
   

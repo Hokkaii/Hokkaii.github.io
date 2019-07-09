@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>关于跨域 | Hokkaii的博客</title>
+  <title>react学习 | Hokkaii的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="同源策略限制了从同一个源加载的文档或脚本如何与来自另一个源的资源进行交互。这是一个用于隔离潜在恶意文件的重要安全机制。">
+  <meta name="description" content="react的状态更新使用this.setState方法触发render函数进行视图刷新，手动的去改变state对象虽然会改变state对象但是并不会触发render钩子函数来更新视图。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于跨域">
-<meta property="og:url" content="http://yoursite.com/2019/04/11/关于跨域/index.html">
+<meta property="og:title" content="react学习">
+<meta property="og:url" content="http://yoursite.com/2019/05/21/react学习/index.html">
 <meta property="og:site_name" content="Hokkaii的博客">
-<meta property="og:description" content="同源策略限制了从同一个源加载的文档或脚本如何与来自另一个源的资源进行交互。这是一个用于隔离潜在恶意文件的重要安全机制。">
+<meta property="og:description" content="react的状态更新使用this.setState方法触发render函数进行视图刷新，手动的去改变state对象虽然会改变state对象但是并不会触发render钩子函数来更新视图。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-11T15:43:31.393Z">
+<meta property="og:updated_time" content="2019-07-09T07:41:48.651Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于跨域">
-<meta name="twitter:description" content="同源策略限制了从同一个源加载的文档或脚本如何与来自另一个源的资源进行交互。这是一个用于隔离潜在恶意文件的重要安全机制。">
+<meta name="twitter:title" content="react学习">
+<meta name="twitter:description" content="react的状态更新使用this.setState方法触发render函数进行视图刷新，手动的去改变state对象虽然会改变state对象但是并不会触发render钩子函数来更新视图。">
   
     <link rel="alternative" href="/atom.xml" title="Hokkaii的博客" type="application/atom+xml">
   
@@ -142,29 +142,70 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-关于跨域" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-react学习" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      关于跨域
+      react学习
     </h1>
   
 
         
-        <a href="/2019/04/11/关于跨域/" class="archive-article-date">
-  	<time datetime="2019-04-11T15:38:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-11</time>
+        <a href="/2019/05/21/react学习/" class="archive-article-date">
+  	<time datetime="2019-05-21T06:38:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-21</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>同源策略限制了从同一个源加载的文档或脚本如何与来自另一个源的资源进行交互。这是一个用于隔离潜在恶意文件的重要安全机制。</p>
-<a id="more"></a>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h2 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h2><h2 id="表单提交加iframe"><a href="#表单提交加iframe" class="headerlink" title="表单提交加iframe"></a>表单提交加iframe</h2><h2 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h2><h2 id="Nginx代理"><a href="#Nginx代理" class="headerlink" title="Nginx代理"></a>Nginx代理</h2><h2 id="Vue中的跨域方案"><a href="#Vue中的跨域方案" class="headerlink" title="Vue中的跨域方案"></a>Vue中的跨域方案</h2>
+        <h2 id="react的状态更新"><a href="#react的状态更新" class="headerlink" title="react的状态更新"></a>react的状态更新</h2><p>使用this.setState方法触发render函数进行视图刷新，手动的去改变state对象虽然会改变state对象但是并不会触发render钩子函数来更新视图。<br><a id="more"></a><br>在react生命周期中进行的多个this.setState会合并成一个，这样可以降低更新成本，但也会带来问题。<br>现有两种特殊情况：<br>第一种：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> componentDidMount() &#123;</span><br><span class="line">        this.timer = setTimeout(() =&gt; &#123;</span><br><span class="line">            this.setState(&#123; num: this.state.star + 1 &#125;);</span><br><span class="line">            this.setState(&#123; num: this.state.star + 1 &#125;);</span><br><span class="line">            this.setState(&#123; num: this.state.star + 1 &#125;);</span><br><span class="line">        &#125;, 5000);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以及：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">componentDidMount() &#123;</span><br><span class="line">    fetch(&apos;https://api.github.com/users/veedrin/repos&apos;)</span><br><span class="line">        .then(res =&gt; res.json())</span><br><span class="line">        .then(res =&gt; &#123;</span><br><span class="line">            console.log(res);</span><br><span class="line">            this.setState(&#123; star: this.state.star + 1 &#125;);</span><br><span class="line">            this.setState(&#123; star: this.state.star + 1 &#125;);</span><br><span class="line">            this.setState(&#123; star: this.state.star + 1 &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>前者的setState不会合并，后者会合并。<br>另外，this.setState不只是支持对象作为参数，它也支持函数作为参数，函数的返回对象就是它更新所使用的对象。比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">componentDidMount() &#123;</span><br><span class="line">    this.setState((prevState, prevProps) =&gt; (&#123; star: prevState.star + 1 &#125;));</span><br><span class="line">    this.setState((prevState, prevProps) =&gt; (&#123; star: prevState.star + 1 &#125;));</span><br><span class="line">    this.setState((prevState, prevProps) =&gt; (&#123; star: prevState.star + 1 &#125;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样可以保证三次更新不会被合并</p>
+<h2 id="数据流动"><a href="#数据流动" class="headerlink" title="数据流动"></a>数据流动</h2><p>Vue中父组件可以通过属性向子组件传值，子组件可以改变父组件传来的值，但父组件的对应值并不会跟随改变。可以通过在父组件使用使用.sync修饰属性配合子组件使用update:value的方式对父组件的相应值进行改变。<br>在react的一个组件中，它的父组件传来的值在this.props这个属性中，并且这个属性是不可改变的属性，想要改变需要借助父组件传过来的函数对父组件的属性进行改变。<br>React没有官方的双向绑定(v-model,[(value)])。</p>
+<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><p>constructor：<br>React借用class类的constructor充当初始化钩子，必须使用super方法才能初始化得到this对象。</p>
+<p>static getDerivedStateFromProps(props, state)：<br>这是一个静态方法，实例化对象无法访问到，因此无法使用this关键词找到这个方法。原因是设计者不希望开发者能在其中使用诸如this.setState等方法来触发渲染页面。<br>这个生命周期钩子的使命是根据父组件传来的props按需更新自己的state，这种state叫做衍生state。返回的对象就是要增量更新的state。<br>它被设计的如此纯粹是因为设计者只希望它被用作使用props更新state。</p>
+<p>render():<br>将组件挂载到dom之上，在这个函数内不可以进行this.setState()。</p>
+<p>componentDidMount()：<br>组件确定已经被挂载于dom之上，这是一个非常重要的生命周期，因为此时组件的一切已经就绪，可以进行http请求等。</p>
+<p>shouldComponentUpdate(nextProps, nextState)：<br>这个生命周期钩子是一个开关，判断是否需要更新，主要用来优化性能。返回true是允许更新，false则反之。<br>PS：关于变量变化的检查策略：在ng以及react均有相应的方法进行性能的优化，vue中没有这个考虑。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">shouldComponentUpdate(nextProps, nextState) &#123;</span><br><span class="line">    if (this.props === nextProps) &#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>需要注意的是，每次更新的时候组件都会产生一个新的nextState，因此不可以使用this.state===nextState进行比较，它的结果只能是false，可以采用比较某个属性值的方式进行比较。nextProps有时会产生一个新对象，有时则不会，这取决于父组件的传值情况。</p>
+<p>getSnapshotBeforeUpdate(prevProps, prevState)：<br>运行于render之后以及componentDidMount()之前，它的返回值可以被componentDidUpdate(nextProps, nextState, snapshot)第三个参数接收。</p>
+<p>componentDidUpdate(nextProps, nextState, snapshot)：<br>这是组件更新之后触发的生命周期钩子。不可以在内部使用this.setState.</p>
+<p>componentWillUnmount():<br>这是组件卸载之前的生命周期钩子。<br>销毁事件监听器、订阅器、定时器<br>注意：react组件上绑定的监听器react会自行销毁。</p>
+<p>componentDidCatch(error, info)<br>定制一个只有componentDidCatch生命周期钩子的ErrorBoundary组件，它只做一件事：如果捕获到错误，则显示错误提示，如果没有捕获到错误，则显示子组件。<br>将需要捕获错误的组件作为ErrorBoundary的子组件渲染，一旦子组件抛出错误，整个应用依然不会崩溃，而是被ErrorBoundary捕获。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from &apos;react&apos;;</span><br><span class="line">class ErrorBoundary extends Component &#123;</span><br><span class="line">    state = &#123; hasError: false &#125;;</span><br><span class="line">    render() &#123;</span><br><span class="line">        if (this.state.hasError) &#123;</span><br><span class="line">            return &lt;h1&gt;Something went wrong.&lt;/h1&gt;;</span><br><span class="line">        &#125;</span><br><span class="line">        return this.props.children;</span><br><span class="line">    &#125;</span><br><span class="line">    componentDidCatch(error, info) &#123;</span><br><span class="line">        this.setState(&#123; hasError: true &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">export default ErrorBoundary;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line">import ErrorBoundary from &apos;./ErrorBoundary&apos;;</span><br><span class="line">import MyWidget from &apos;./MyWidget&apos;;</span><br><span class="line">const App = () =&gt; &#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;ErrorBoundary&gt;</span><br><span class="line">            &lt;MyWidget /&gt;</span><br><span class="line">        &lt;/ErrorBoundary&gt;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line">export default App;</span><br></pre></td></tr></table></figure>
+<p>组件树生命周期调用栈：<br>Z字型:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">app.render();</span><br><span class="line">child.render();</span><br><span class="line">grandson.render();</span><br><span class="line"></span><br><span class="line">// divide</span><br><span class="line">grandson.componentDidMount();</span><br><span class="line">child.componentDidMount();</span><br><span class="line">app.componentDidMount();</span><br></pre></td></tr></table></figure></p>
+<p>已经不推荐使用的生命周期：<br>componentWillMount()：<br>组件即将挂载<br>componentWillReceiveProps(nextProps)：<br>组件接收到了新的属性。<br>组件没有收到新的属性，但是由于父组件重新渲染导致当前组件也被重新渲染。<br>componentWillUpdate(nextProps, nextState)：<br>组件即将更新</p>
+<h2 id="函数组件与类组件区别"><a href="#函数组件与类组件区别" class="headerlink" title="函数组件与类组件区别"></a>函数组件与类组件区别</h2><p>类组件允许内部状态的存在，有完整的生命周期，性能稍逊。<br>函数式组件接受一个props返回一个react组件。<br>可以使用类组件作为容器，负责复杂的业务逻辑，函数式组件作为展示组件。<br>PureComponent用作性能优化，原理是通过shouldComponentUpdate生命周期钩子判断是否更新组件。<br>react16.8以后，可以在函数组件中使用hook来实现类组件的功能。</p>
+<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>首先事this丢失问题，这一情况类似于将函数作为参数传递。要绑定this，方法是bind（es5）与箭头函数（es6）<br>事件event对象：如果想要在事件回调函数中进行异步操作并使用这个对象是不能实现的，因为react在事件执行完毕后便销毁了这个对象。</p>
+<h2 id="操作DOM"><a href="#操作DOM" class="headerlink" title="操作DOM"></a>操作DOM</h2><p>this.refs：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from &apos;react&apos;;</span><br><span class="line">class App extends Component &#123;</span><br><span class="line">    componentDidMount() &#123;</span><br><span class="line">        this.refs.textInput.focus();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;input type=&quot;text&quot; ref=&quot;textInput&quot; /&gt;</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">export default App;</span><br></pre></td></tr></table></figure></p>
+<p>createRef：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component, createRef &#125; from &apos;react&apos;;</span><br><span class="line">class App extends Component &#123;</span><br><span class="line">    textInput = createRef();</span><br><span class="line"></span><br><span class="line">    componentDidMount() &#123;</span><br><span class="line">        this.textInput.current.focus();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;input type=&quot;text&quot; ref=&#123;this.textInput&#125; /&gt;</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">export default App;</span><br></pre></td></tr></table></figure></p>
+<p>createRef()可以对dom元素进行绑定，如果要用这种方式对子组件进行引用，那么子组件必须是类组件，因为获取到的是类的实例，函数式组件没有实例。</p>
+<p>forwardRef：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component, createRef &#125; from &apos;react&apos;;import Search from &apos;./Search&apos;;</span><br><span class="line">class App extends Component &#123;</span><br><span class="line">    textInput = createRef();</span><br><span class="line">    componentDidMount() &#123;</span><br><span class="line">        this.textInput.current.focus();</span><br><span class="line">    &#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;Search ref=&#123;this.textInput&#125; /&gt;</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">const Search = forwardRef((props, ref) =&gt; (</span><br><span class="line">    &lt;input type=&quot;text&quot; ref=&#123;ref&#125; /&gt;</span><br><span class="line">));</span><br></pre></td></tr></table></figure></p>
+<p>forwardRef意为向前传递ref，它是一个容器包裹一个组件。forwardRef可以使函数组件接收除props之外另一个参数ref，这个参数可以用来绑定内部多的dom元素，在父组件中可以通过ref属性给它传入createRef()进行绑定。</p>
+<h2 id="react-redux简单介绍"><a href="#react-redux简单介绍" class="headerlink" title="react-redux简单介绍"></a>react-redux简单介绍</h2><p>定义action和与之对应的reducer<br>监听store的变化，提供回调函数<br>dispatch一个action，等待好运发生</p>
+<p>action常规来说返回一个对象，store依据这个对象的数据，使用dispatch并借助reducers来修改store的数据树<br>事实上，reducers才是store的真正的数据来源，state提供默认的数据。<br>这样会产生一个问题就是在action中将不能进行异步请求，这个时候要借助react-thunk中间件，他会判断dispatch的是一个函数还是一个对象，如果是对象按原流程执行，如果是函数的话就执行这个函数，函数内部可以进行异步请求，异步请求结束后进行dispatch即可。</p>
+<p>使用Provider组件，使得整个app访问到Redux store，使用PersistGate组件实现redux的数据持久化，防止数据丢失</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;Provider store=&#123;store&#125;&gt;</span><br><span class="line">    &lt;PersistGate persistor=&#123;persistStore(store)&#125;&gt;</span><br><span class="line">        &lt;App/&gt;</span><br><span class="line">    &lt;/PersistGate&gt;</span><br><span class="line">&lt;/Provider&gt;</span><br></pre></td></tr></table></figure>
+<p>使用connect方法能够让你把组件和store连接起来<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import &#123; connect &#125; from &apos;react-redux&apos;</span><br><span class="line">@connect(</span><br><span class="line">    state =&gt; state,</span><br><span class="line">    &#123; setMenuList&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<p>大致流程：</p>
+<p>action返回对象  ===》 store使用这个对象dispatch ====》 reducers依据这个对象返回不同的数据  ====》 不同的数据会改变store的状态树</p>
+<h2 id="react-router-dom常用方法介绍"><a href="#react-router-dom常用方法介绍" class="headerlink" title="react-router-dom常用方法介绍"></a>react-router-dom常用方法介绍</h2><p>介绍：最外层由Router标签包裹，NavLink和Link标签会转化为带有路径的a标签，Route可以指定路由要跳转的组件，是路径和组件之间的桥梁。</p>
+<p>基本路由类型：BrowserRouter以及HashRouter，对应html5的history模式以及哈希模式</p>
+<p>路由传参，两种方式：url传参和隐式传参，隐式传参：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//跳转</span><br><span class="line">this.props.history.push(&#123;pathname: &apos;/detail&apos;,state: &#123;id: 3&#125;&#125;)</span><br><span class="line">//读取</span><br><span class="line">this.props.history.location.state</span><br></pre></td></tr></table></figure></p>
+<p>路由嵌套：在需要引入子路由的组件内获取当前路由路径，使用Route并在前者路径上使用当前路由路径进行拼接即可。</p>
+<p>路由重定向：Redirect标签</p>
+<h2 id="Hook简单介绍"><a href="#Hook简单介绍" class="headerlink" title="Hook简单介绍"></a>Hook简单介绍</h2><p>Hook 是 React 16.8 的新增特性。它可以让你在不编写 class 的情况下使用 state 以及其他的 React 特性。</p>
+<p>使用state：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const [count, setCount] = useState(0);</span><br><span class="line">setCount(count + 1)</span><br></pre></td></tr></table></figure></p>
+<p>使用生命周期：<br>useEffect可以被看做 componentDidMount，componentDidUpdate 和 componentWillUnmount 这三个函数的组合。<br>通常情况下的订阅数据源，或者是计时器定时器等会在componentDidMount中注册，然后在componentWillUnmount中清除，在使用hook后可以让useEffect函数返回一个函数用于清除订阅或者计时器，这个函数会在组件卸载的时候被清除。<br>还有一个问题就是我们通常在componentDidMount这个生命周期进行http数据请求并且setState，但是如果在useEffect函数内进行setState会使得组件进入死循环。解决方法是，如果只希望useEffect执行一次，只在useEffect方法第二个参数传入[]空数组：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">useEffect(() =&gt; &#123;</span><br><span class="line">    const fetchData = async () =&gt; &#123;</span><br><span class="line">    const result = await fetch(&apos;https://api.github.com/users/veedrin/repos&apos;).then(res 	=&gt; res.json())</span><br><span class="line">        setData(result);</span><br><span class="line">    &#125;;</span><br><span class="line">    fetchData();</span><br><span class="line">&#125;, []);</span><br></pre></td></tr></table></figure>
+<h2 id="context"><a href="#context" class="headerlink" title="context"></a>context</h2><p>给一个组件树提供一个全局数据。</p>
+<p>const ThemeContext = React.createContext(‘light’);设置默认值为light<br>在组件树最外层使用  &lt;ThemeContext.Provider value=”dark”&gt;包裹整个组件树，在需要使用数据的组件里：static contextType = ThemeContext并且使用this.context可以拿到该数据。</p>
+
       
 
       
@@ -185,18 +226,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/05/21/react学习/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/06/20/对虚拟dom的初步理解/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          react学习
+          对虚拟dom的初步理解
         
       </div>
     </a>
   
   
-    <a href="/2019/04/07/就一点/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">就一点</div>
+    <a href="/2019/04/11/关于跨域/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关于跨域</div>
       <i class="icon-circle-right"></i>
     </a>
   
