@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>我了解的JavaScript运行机制-2（异步与事件循环） | Hokkaii的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="提要这里只谈JavaScript在浏览器环境中的事件循环（Event Loop），不涉及Nodejs环境的情况。首先，JavaScript是一门单线程语言。单线程，顾名思义，就意味着代码的执行是由上而下顺序执行的，也就是说只能是一个任务执行完毕之后，随后的任务才可以接着执行。考虑到Javascript是一门浏览器脚本语言，因此前者只能是单线程的。伴随着单线程接踵而至的就是堵塞问题，因为难免有一些任">
+  <meta name="description" content="异步与事件循环">
 <meta property="og:type" content="article">
 <meta property="og:title" content="我了解的JavaScript运行机制-2（异步与事件循环）">
 <meta property="og:url" content="http://yoursite.com/2018/12/08/我了解的JavaScript运行机制-2/index.html">
 <meta property="og:site_name" content="Hokkaii的博客">
-<meta property="og:description" content="提要这里只谈JavaScript在浏览器环境中的事件循环（Event Loop），不涉及Nodejs环境的情况。首先，JavaScript是一门单线程语言。单线程，顾名思义，就意味着代码的执行是由上而下顺序执行的，也就是说只能是一个任务执行完毕之后，随后的任务才可以接着执行。考虑到Javascript是一门浏览器脚本语言，因此前者只能是单线程的。伴随着单线程接踵而至的就是堵塞问题，因为难免有一些任">
+<meta property="og:description" content="异步与事件循环">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://image-static.segmentfault.com/402/025/4020255170-59bc9e1671029_articlex">
-<meta property="og:updated_time" content="2019-03-13T03:41:26.000Z">
+<meta property="og:updated_time" content="2021-09-07T15:15:40.705Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我了解的JavaScript运行机制-2（异步与事件循环）">
-<meta name="twitter:description" content="提要这里只谈JavaScript在浏览器环境中的事件循环（Event Loop），不涉及Nodejs环境的情况。首先，JavaScript是一门单线程语言。单线程，顾名思义，就意味着代码的执行是由上而下顺序执行的，也就是说只能是一个任务执行完毕之后，随后的任务才可以接着执行。考虑到Javascript是一门浏览器脚本语言，因此前者只能是单线程的。伴随着单线程接踵而至的就是堵塞问题，因为难免有一些任">
+<meta name="twitter:description" content="异步与事件循环">
 <meta name="twitter:image" content="https://image-static.segmentfault.com/402/025/4020255170-59bc9e1671029_articlex">
   
     <link rel="alternative" href="/atom.xml" title="Hokkaii的博客" type="application/atom+xml">
@@ -164,9 +164,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="提要"><a href="#提要" class="headerlink" title="提要"></a>提要</h2><p>这里只谈JavaScript在浏览器环境中的事件循环（Event Loop），不涉及Nodejs环境的情况。<br>首先，JavaScript是一门单线程语言。单线程，顾名思义，就意味着代码的执行是由上而下顺序执行的，也就是说只能是一个任务执行完毕之后，随后的任务才可以接着执行。考虑到Javascript是一门浏览器脚本语言，因此前者只能是单线程的。伴随着单线程接踵而至的就是堵塞问题，因为难免有一些任务执行速度比较慢，最常见的Ajax请求便是如此。考虑到用户体验，我们不能允许长时间的页面加载，异步可以很好的解决这个问题，事件循环是异步的底层原理。</p>
+        <p>异步与事件循环<br><a id="more"></a></p>
+<h2 id="提要"><a href="#提要" class="headerlink" title="提要"></a>提要</h2><p>这里只谈JavaScript在浏览器环境中的事件循环（Event Loop），不涉及Nodejs环境的情况。<br>首先，JavaScript是一门单线程语言。单线程，顾名思义，就意味着代码的执行是由上而下顺序执行的，也就是说只能是一个任务执行完毕之后，随后的任务才可以接着执行。考虑到Javascript是一门浏览器脚本语言，因此前者只能是单线程的。伴随着单线程接踵而至的就是堵塞问题，因为难免有一些任务执行速度比较慢，最常见的Ajax请求便是如此。考虑到用户体验，我们不能允许长时间的页面加载，异步可以很好的解决这个问题，事件循环是异步的底层原理。</p>
 <hr>
-<a id="more"></a>
 <h2 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h2><p>首先明确几个概念：<br>执行栈：用栈的概念去思考这个问题（压入，弹出）：任务进入栈，执行完被毕弹出栈，这个任务的执行流程就结束了。<br>主线程：所有的同步任务的执行的过程，同步任务执行时遵照上述进栈出栈流程。<br>任务队列：当有异步任务就绪（例如Ajax数据请求就绪），它的回调函数便会被放进任务队列中。待所有的同步任务执行结束，执行栈这个时候就是空的，这个时候执行栈开始从任务队列中读取任务并且执行。很明显，任务队列中的异步回调函数排列顺序是由异步任务就绪的先后顺序决定的，也即率先就绪率先被执行。</p>
 <p>当执行栈为空时，执行栈每从任务队列中读取并执行完一个任务，就是一轮事件循环。</p>
 <hr>

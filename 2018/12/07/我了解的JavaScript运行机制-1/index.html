@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>我了解的JavaScript运行机制-1（闭包，作用域链） | Hokkaii的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="作用域首先，明确一个概念，作用域：编程语言中函数与变量的可访问范围编程语言中的作用域有两种：词法作用域与动态作用域。  词法作用域:这种作用域的访问范围在编译之时就被确定了，不会因为执行环境的改变而改变，因此词法作用域也叫做静态作用域，JavaScript就使用这种作用域。 动态作用域：动态作用域的访问范围由执行的环境决定。   JavaScript中作用域的分类全局作用域，局部作用域（函数作用域">
+  <meta name="description" content="作用域、执行上下文、作用域链、闭包">
 <meta property="og:type" content="article">
 <meta property="og:title" content="我了解的JavaScript运行机制-1（闭包，作用域链）">
 <meta property="og:url" content="http://yoursite.com/2018/12/07/我了解的JavaScript运行机制-1/index.html">
 <meta property="og:site_name" content="Hokkaii的博客">
-<meta property="og:description" content="作用域首先，明确一个概念，作用域：编程语言中函数与变量的可访问范围编程语言中的作用域有两种：词法作用域与动态作用域。  词法作用域:这种作用域的访问范围在编译之时就被确定了，不会因为执行环境的改变而改变，因此词法作用域也叫做静态作用域，JavaScript就使用这种作用域。 动态作用域：动态作用域的访问范围由执行的环境决定。   JavaScript中作用域的分类全局作用域，局部作用域（函数作用域">
+<meta property="og:description" content="作用域、执行上下文、作用域链、闭包">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-10T18:00:18.692Z">
+<meta property="og:updated_time" content="2021-09-07T15:16:37.484Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我了解的JavaScript运行机制-1（闭包，作用域链）">
-<meta name="twitter:description" content="作用域首先，明确一个概念，作用域：编程语言中函数与变量的可访问范围编程语言中的作用域有两种：词法作用域与动态作用域。  词法作用域:这种作用域的访问范围在编译之时就被确定了，不会因为执行环境的改变而改变，因此词法作用域也叫做静态作用域，JavaScript就使用这种作用域。 动态作用域：动态作用域的访问范围由执行的环境决定。   JavaScript中作用域的分类全局作用域，局部作用域（函数作用域">
+<meta name="twitter:description" content="作用域、执行上下文、作用域链、闭包">
   
     <link rel="alternative" href="/atom.xml" title="Hokkaii的博客" type="application/atom+xml">
   
@@ -162,7 +162,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p>首先，明确一个概念，作用域：编程语言中函数与变量的可访问范围<br>编程语言中的作用域有两种：词法作用域与动态作用域。</p>
+        <p>作用域、执行上下文、作用域链、闭包<br><a id="more"></a></p>
+<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p>首先，明确一个概念，作用域：编程语言中函数与变量的可访问范围<br>编程语言中的作用域有两种：词法作用域与动态作用域。</p>
 <ul>
 <li>词法作用域:这种作用域的访问范围在编译之时就被确定了，不会因为执行环境的改变而改变，因此词法作用域也叫做静态作用域，JavaScript就使用这种作用域。</li>
 <li>动态作用域：动态作用域的访问范围由执行的环境决定。</li>
@@ -170,7 +171,6 @@
 <hr>
 <h3 id="JavaScript中作用域的分类"><a href="#JavaScript中作用域的分类" class="headerlink" title="JavaScript中作用域的分类"></a>JavaScript中作用域的分类</h3><p>全局作用域，局部作用域（函数作用域），es6之后可以使用let或者const构建块级作用域</p>
 <hr>
-<a id="more"></a>
 <h2 id="执行上下文栈"><a href="#执行上下文栈" class="headerlink" title="执行上下文栈"></a>执行上下文栈</h2><p>在js执行的线程之内，每当转入到一段可以被执行的代码段，就会进入一个执行上下文，js中的可执行代码块分为全局代码以及函数代码。全局代码在script标签被编译后便开始执行，而函数代码的执行要等到函数被激活之时。仔细考虑这个过程：<br>我们可以把所有上下文的集合理解为一个栈–执行上下文栈，当全局代码执行时，全局上下文首先被压入这个栈。待到函数执行之时，那么函数的执行上下文也会被从顶部压入这个栈。待到函数执行完毕之时，那么这个函数的执行上下文就会被弹出，以此类推（全局上下文永远在这个栈的底部）。<br>在这里，我们要考虑这一种特殊情况：<br>函数在执行过程中调用了其他函数。我们称执行函数为caller，被调用的函数为callee；在caller调用了callee之后（也可以称这个过程是一个执行上下文触发了另一个执行上下文），caller会暂缓自身的执行（在这个时间点，执行上下文栈被压入callee的上下文），转而等待callee的执行，在callee执行完毕之后，caller再去完成自身的流程，最后函数执行完毕（return），函数上下文被弹出。</p>
 <hr>
 <h2 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h2><p>执行上下文的组成：<br>变量对象(variable object)，this指针(this value)，作用域链(scope chain)</p>
