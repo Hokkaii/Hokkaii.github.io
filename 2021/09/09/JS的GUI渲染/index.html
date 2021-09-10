@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Hokkaii的博客">
 <meta property="og:description" content="浏览器的渲染线程、JS引擎线程运行的流程。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-09-10T11:24:42.506Z">
+<meta property="og:updated_time" content="2021-09-10T11:32:40.837Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS的GUI渲染线程">
 <meta name="twitter:description" content="浏览器的渲染线程、JS引擎线程运行的流程。">
@@ -198,7 +198,7 @@
 </li>
 <li>Vue的nexTick(callback)<ul>
 <li>大致实现原理：对当前队列中的nextTick的回调函数进行收集，放置于一个执行栈中，待异步渲染执行后清空执行栈。</li>
-<li>可以使用Promise.resolve.then（保证浏览器支持Promise）或者setTimeout(fn, 0)替代nexTick。此时的Promise.resolve.then作为一个微任务，它的回调函数会在Vue的异步渲染（通常是Promise.then）的回调执行完毕后执行（本次事件循环），而setTimeout作为一个宏任务会在下次事件循环最开始被执行。</li>
+<li>可以使用Promise.resolve.then（保证浏览器支持Promise）或者setTimeout(fn, 0)替代Vue的nexTick：此时的Promise.resolve.then作为一个微任务，它的回调函数会在Vue的异步渲染（通常是Promise.then）的回调执行完毕后执行（本次事件循环），而setTimeout作为一个宏任务会在下次事件循环最开始被执行。</li>
 </ul>
 </li>
 </ol>
