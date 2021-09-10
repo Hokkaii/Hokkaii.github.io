@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Angular RxJS-Observable-Observer-Subject | Hokkaii的博客</title>
+  <title>JS的GUI渲染线程 | Hokkaii的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="观察者模式观察者模式是JavaScript中一种经典的设计模式。具体实现是：一个目标对象管理所有依赖于它的所有观察者对象，并且在它自身发生变化的时候主动发出通知（前文异步编程方案一文中曾经使用这一设计模式解决异步编程问题）。在JavaScript中这一模式最常见的就是用户事件触发回调函数。">
+  <meta name="description" content="浏览器的渲染线程、JS引擎线程运行的流程。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Angular RxJS-Observable-Observer-Subject">
-<meta property="og:url" content="http://yoursite.com/2019/02/14/Angular-Rxjs-Subject/index.html">
+<meta property="og:title" content="JS的GUI渲染线程">
+<meta property="og:url" content="http://yoursite.com/2021/09/09/JS的GUI渲染/index.html">
 <meta property="og:site_name" content="Hokkaii的博客">
-<meta property="og:description" content="观察者模式观察者模式是JavaScript中一种经典的设计模式。具体实现是：一个目标对象管理所有依赖于它的所有观察者对象，并且在它自身发生变化的时候主动发出通知（前文异步编程方案一文中曾经使用这一设计模式解决异步编程问题）。在JavaScript中这一模式最常见的就是用户事件触发回调函数。">
+<meta property="og:description" content="浏览器的渲染线程、JS引擎线程运行的流程。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-02-14T10:07:02.000Z">
+<meta property="og:updated_time" content="2021-09-10T11:24:42.506Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Angular RxJS-Observable-Observer-Subject">
-<meta name="twitter:description" content="观察者模式观察者模式是JavaScript中一种经典的设计模式。具体实现是：一个目标对象管理所有依赖于它的所有观察者对象，并且在它自身发生变化的时候主动发出通知（前文异步编程方案一文中曾经使用这一设计模式解决异步编程问题）。在JavaScript中这一模式最常见的就是用户事件触发回调函数。">
+<meta name="twitter:title" content="JS的GUI渲染线程">
+<meta name="twitter:description" content="浏览器的渲染线程、JS引擎线程运行的流程。">
   
     <link rel="alternative" href="/atom.xml" title="Hokkaii的博客" type="application/atom+xml">
   
@@ -142,82 +142,66 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Angular-Rxjs-Subject" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-JS的GUI渲染" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Angular RxJS-Observable-Observer-Subject
+      JS的GUI渲染线程
     </h1>
   
 
         
-        <a href="/2019/02/14/Angular-Rxjs-Subject/" class="archive-article-date">
-  	<time datetime="2019-02-14T09:21:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-14</time>
+        <a href="/2021/09/09/JS的GUI渲染/" class="archive-article-date">
+  	<time datetime="2021-09-09T02:24:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h2><p>观察者模式是JavaScript中一种经典的设计模式。具体实现是：一个目标对象管理所有依赖于它的所有观察者对象，并且在它自身发生变化的时候主动发出通知（前文异步编程方案一文中曾经使用这一设计模式解决异步编程问题）。在JavaScript中这一模式最常见的就是用户事件触发回调函数。</p>
-<hr>
-<a id="more"></a>
-<h2 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h2><p>在不需要对象内部显示的情况下，提供一种方法可以顺序的访问聚合对象中的各个元素。<br>JavaScript中的迭代器模式：</p>
-<h3 id="Es5"><a href="#Es5" class="headerlink" title="Es5"></a>Es5</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function makeIterator(array)&#123;</span><br><span class="line">    var nextIndex = 0;</span><br><span class="line">    return &#123;</span><br><span class="line">        next: function()&#123;</span><br><span class="line">            return nextIndex &lt; array.length ?</span><br><span class="line">                &#123;value: array[nextIndex++], done: false&#125; :</span><br><span class="line">                &#123;done: true&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>使用一个函数，这个函数可以返回一函数，这个函数依据父函数的参数（数组）的长度来判断来返回相应的信息。</p>
-<h3 id="Es6"><a href="#Es6" class="headerlink" title="Es6"></a>Es6</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let arr = [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;];</span><br><span class="line">let iter = arr[Symbol.iterator]();</span><br></pre></td></tr></table></figure>
-<p>在 ES 6 中我们可以通过 Symbol.iterator 来创建可迭代对象的内部迭代器。</p>
-<hr>
-<h2 id="RxJS"><a href="#RxJS" class="headerlink" title="RxJS"></a>RxJS</h2><p>RxJS 是基于观察者模式和迭代器模式以函数式编程思维来实现的。RxJS 中含有两个基本概念：Observables 与 Observer。Observables 作为被观察者，是一个值或事件的流集合；而 Observer 则作为观察者，根据 Observables 进行处理。即 <strong>观察者以迭代器模式来订阅发布者主动发布的数据</strong>。</p>
-<hr>
-<h2 id="Observable与Observer"><a href="#Observable与Observer" class="headerlink" title="Observable与Observer"></a>Observable与Observer</h2><p>Observable 作为被观察者，是一个值或事件的流集合；而 Observer 则作为观察者，根据 Observable进行处理。</p>
-<p>最简单的手写一个observable的实现：</p>
-<h3 id="DataSource-数据源"><a href="#DataSource-数据源" class="headerlink" title="DataSource - 数据源"></a>DataSource - 数据源</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class DataSource &#123;</span><br><span class="line"></span><br><span class="line">    constructor() &#123;</span><br><span class="line">        let i = 0;</span><br><span class="line">        this._id = setInterval(() =&gt; this.emit(i++), 200); // 创建定时器</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    emit(n) &#123;</span><br><span class="line">        const limit = 10;  // 设置数据上限值</span><br><span class="line">        if (this.ondata) &#123;</span><br><span class="line">            this.ondata(n);</span><br><span class="line">        &#125;</span><br><span class="line">        if (n === limit) &#123;</span><br><span class="line">            if (this.oncomplete) &#123;</span><br><span class="line">                this.oncomplete();</span><br><span class="line">            &#125;</span><br><span class="line">            this.destroy();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    destroy() &#123; // 清除定时器</span><br><span class="line">        clearInterval(this._id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="myObservable"><a href="#myObservable" class="headerlink" title="myObservable"></a>myObservable</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function myObservable(observer) &#123;</span><br><span class="line">    let datasource = new DataSource(); // 创建数据源</span><br><span class="line">    datasource.ondata = (e) =&gt; observer.next(e); // 处理数据流</span><br><span class="line">    datasource.onerror = (err) =&gt; observer.error(err); // 处理异常</span><br><span class="line">    datasource.oncomplete = () =&gt; observer.complete(); // 处理数据流终止</span><br><span class="line">    return () =&gt; &#123; // 返回一个函数用于，销毁数据源</span><br><span class="line">        datasource.destroy();</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const unsub = myObservable(&#123;</span><br><span class="line">    next(x) &#123; console.log(x); &#125;,</span><br><span class="line">    error(err) &#123; console.error(err); &#125;,</span><br><span class="line">    complete() &#123; console.log(&apos;done&apos;)&#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 移除注释，可以测试取消订阅</span><br><span class="line">// setTimeout(unsub, 500);</span><br></pre></td></tr></table></figure>
-<p>上书代码数据源类使用定时器抛出数据，myObservable函数中使用数据源的实例对象；这个实例对象每次抛出数据通过一个observer（包含三个回调函数的对象）处理数据且最后返回一个方法用于销毁数据源，最后的结果是打印1到10十个数字以及”done”。<br>这就是一Observable抛出数据被订阅者订阅的简单过程：Observable作为一个函数，接受一个 Observer 对象 (包含 next、error、complete 方法的对象) 作为参数，返回一个 unsubscribe 函数，用于取消订阅。observer是一个包含 next、error、complete 方法的对象。</p>
-<hr>
-<h2 id="RxJS中的Observable"><a href="#RxJS中的Observable" class="headerlink" title="RxJS中的Observable"></a>RxJS中的Observable</h2><h3 id="Rx-Observable-create"><a href="#Rx-Observable-create" class="headerlink" title="Rx.Observable.create"></a>Rx.Observable.create</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var observable = Rx.Observable</span><br><span class="line">    .create(function(observer) &#123;</span><br><span class="line">        observer.next(&apos;Kobe&apos;); // RxJS 4.x 以前的版本用 onNext</span><br><span class="line">        observer.next(&apos;bryant&apos;);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">// 订阅这个 Observable    </span><br><span class="line">observable.subscribe(function(value) &#123;</span><br><span class="line">    console.log(value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>上书代码的执行结果是控制台先后打印’Kobe’与’bryant’。</p>
-<h3 id="Observable-Creation-Operator"><a href="#Observable-Creation-Operator" class="headerlink" title="Observable - Creation Operator"></a>Observable - Creation Operator</h3><p>RxJS中其他的创建Observable的方式：</p>
-<ul>
-<li>create</li>
-<li>of</li>
-<li>from</li>
-<li>fromEvent</li>
-<li>fromPromise</li>
-<li>empty</li>
-<li>never</li>
-<li>throw</li>
-<li>interval</li>
-<li>timer</li>
-</ul>
-<p>of命令生成Observable：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var source = Rx.Observable.of(&apos;Semlinker&apos;, &apos;Lolo&apos;);</span><br><span class="line">source.subscribe(&#123;</span><br><span class="line">    next: function(value) &#123;</span><br><span class="line">        console.log(value);</span><br><span class="line">    &#125;,</span><br><span class="line">    complete: function() &#123;</span><br><span class="line">        console.log(&apos;complete!&apos;);</span><br><span class="line">    &#125;,</span><br><span class="line">    error: function(error) &#123;</span><br><span class="line">        console.log(error);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>……</p>
-<h2 id="Observable-vs-Promise"><a href="#Observable-vs-Promise" class="headerlink" title="Observable vs Promise"></a>Observable vs Promise</h2><p>做一下JavaScript中的Promise与RxJS中的Observable的比较：</p>
+        <p>浏览器的渲染线程、JS引擎线程运行的流程。<br><a id="more"></a></p>
+<h2 id="dom操作与回流重绘"><a href="#dom操作与回流重绘" class="headerlink" title="dom操作与回流重绘"></a>dom操作与回流重绘</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// style:</span><br><span class="line">.easy &#123;</span><br><span class="line">    width: 200px;</span><br><span class="line">    height: 200px;</span><br><span class="line">    background: lightgoldenrodyellow;</span><br><span class="line">&#125;  </span><br><span class="line">.hard &#123;</span><br><span class="line">    background: lightsalmon;</span><br><span class="line">    transition: 2s all;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// js:</span><br><span class="line">var body = document.querySelector(&apos;body&apos;);</span><br><span class="line">var div = document.createElement(&apos;div&apos;);</span><br><span class="line">body.appendChild(div)</span><br><span class="line">div.classList.add(&apos;easy&apos;)</span><br><span class="line">div.clientLeft;</span><br><span class="line">div.classList.add(&apos;hard&apos;)</span><br></pre></td></tr></table></figure>
 <ol>
-<li>执行情况:promise在创建之时便会执行（因此我们常常使用一个函数返回一个promise）。Observable在创建后并不会立即执行，而是会在调用后执行。</li>
-<li>状态：promise只有三个状态，也即pending（准备中）、resolved（成功）、rejected（失败），这也就意味着promise只能返回一个值。Observable能返回多个值，因此它更多的状态。</li>
-<li>是否可以被中断：promise是一次完成且只返回一个值，因此它是不可以被中断的。Observable可以返回多个值且订阅可以被中断（RxJS的Observable的subscribe()方法会返回一个unsubscribe()方法用于取消订阅）。</li>
-<li>操作符使用情况：Observable支持 map、filter、reduce 等操作符，在数据被订阅之前对数据进行预处理（个人认为实际使用意义不大）。promise不支持任何操作符。</li>
+<li>浏览器的渲染过程<br>解析HTML与CSS生成DOM树与CSS树 =&gt; 结合生成Render树 =&gt; Layout回流（得到节点几何信息，包括位置、大小） =&gt; Painting重绘（根据渲染树以及回流得到的几何信息和样式，将渲染树的每个节点都转换为屏幕上的实际像素并发送GPU） =&gt; Display。</li>
+<li>dom操作：<ul>
+<li>是同步操作（未出现Promise、setTimeout和script），在dom操作后立即可以获取最新的dom，但不会立即渲染，直到浏览器发生回流重绘。</li>
+</ul>
+</li>
+<li>何时发生回流重绘<ul>
+<li>添加或删除可见的DOM元素。</li>
+<li>元素的位置发生变化。</li>
+<li>元素的尺寸发生变化（包括外边距、内边框、边框大小、高度和宽度等）。</li>
+<li>内容发生变化，比如文本变化或图片被另一个不同尺寸的图片所替代。</li>
+<li>页面一开始渲染的时候（这肯定避免不了）。</li>
+<li>浏览器的窗口尺寸变化（因为回流是根据视口的大小来计算元素的位置和大小的）。</li>
+</ul>
+</li>
+<li>回流重绘的时机<ul>
+<li>由于每次回流都会造成额外的计算消耗，因此大多数浏览器都会通过队列化修改并批量执行来优化回流过程。浏览器会将修改操作放入到队列里，直到过了<b>一段时间（时间片）</b>或者操作达到了一个阈值，才清空队列。</li>
+<li>时间片：加入屏幕的刷新率是60hz，那么16.6ms会刷新一次屏幕，这个16.6ms就是所谓的时间片。</li>
+</ul>
+</li>
+<li>强制回流的方法<ul>
+<li>所有同步提供布局指标的API都会触发强制回流，例如offsetTop、scrollTop、clientTop、getComputedStyle()、getBoundingClientRect等。</li>
+<li>具体见： <a href="https://gist.github.com/paulirish/5d52fb081b3570c81e3a" target="_blank" rel="noopener">强制回流的API清单</a></li>
+</ul>
+</li>
 </ol>
 <hr>
-<h2 id="Subject"><a href="#Subject" class="headerlink" title="Subject"></a>Subject</h2><p>看一个简单的Observable订阅过程：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const interval$ = Rx.Observable.interval(1000).take(3);</span><br><span class="line">interval$.subscribe(&#123;</span><br><span class="line">    next: value =&gt; console.log(&apos;Observer A get value: &apos; + value);</span><br><span class="line">&#125;);</span><br><span class="line">setTimeout(() =&gt; &#123;</span><br><span class="line">    interval$.subscribe(&#123;</span><br><span class="line">        next: value =&gt; console.log(&apos;Observer B get value: &apos; + value);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;, 1000);</span><br></pre></td></tr></table></figure></p>
-<p>上书代码的结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Observer A get value: 0</span><br><span class="line">Observer A get value: 1</span><br><span class="line">Observer B get value: 0</span><br><span class="line">Observer A get value: 2</span><br><span class="line">Observer B get value: 1</span><br><span class="line">Observer B get value: 2</span><br></pre></td></tr></table></figure></p>
-<p>可以看得出Observable 对象可以被重复订阅而且Observable 对象每次被订阅后，都会重新执行。这是Observable的默认场景，现在希望不要重复订阅，比如第二个订阅者可以得到与第一个订阅者相同状态的返回值。这个时候需要一个特定的Subject:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Subject &#123;   </span><br><span class="line">    constructor() &#123;</span><br><span class="line">        this.observers = [];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    addObserver(observer) &#123; </span><br><span class="line">        this.observers.push(observer);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    next(value) &#123;  </span><br><span class="line">        this.observers.forEach(o =&gt; o.next(value));    </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    error(error)&#123; </span><br><span class="line">        this.observers.forEach(o =&gt; o.error(error));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    complete() &#123;</span><br><span class="line">        this.observers.forEach(o =&gt; o.complete());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>使用:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">const interval$ = Rx.Observable.interval(1000).take(3);</span><br><span class="line">let subject = new Subject();</span><br><span class="line"></span><br><span class="line">let observerA = &#123;</span><br><span class="line">    next: value =&gt; console.log(&apos;Observer A get value: &apos; + value),</span><br><span class="line">    error: error =&gt; console.log(&apos;Observer A error: &apos; + error),</span><br><span class="line">    complete: () =&gt; console.log(&apos;Observer A complete!&apos;)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var observerB = &#123;</span><br><span class="line">    next: value =&gt; console.log(&apos;Observer B get value: &apos; + value),</span><br><span class="line">    error: error =&gt; console.log(&apos;Observer B error: &apos; + error),</span><br><span class="line">    complete: () =&gt; console.log(&apos;Observer B complete!&apos;)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">subject.addObserver(observerA); // 添加观察者A</span><br><span class="line">interval$.subscribe(subject); // 订阅interval$对象</span><br><span class="line">setTimeout(() =&gt; &#123;</span><br><span class="line">    subject.addObserver(observerB); // 添加观察者B</span><br><span class="line">&#125;, 1000);</span><br></pre></td></tr></table></figure></p>
-<p>结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Observer A get value: 0</span><br><span class="line">Observer A get value: 1</span><br><span class="line">Observer B get value: 1</span><br><span class="line">Observer A get value: 2</span><br><span class="line">Observer B get value: 2</span><br><span class="line">Observer A complete!</span><br><span class="line">Observer B complete!</span><br></pre></td></tr></table></figure></p>
-<p>这个时候达到了预想的效果。而且可以得到一个结论：subject既是一个Observer对象又是一个Observable 对象。当有新消息时，Subject 会对内部的 observers 列表进行组播 (multicast)。</p>
-<hr>
-<h2 id="RxJS-Subject"><a href="#RxJS-Subject" class="headerlink" title="RxJS Subject"></a>RxJS Subject</h2><p>RxJS Subject源码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">export declare class Subject&lt;T&gt; extends Observable&lt;T&gt; implements SubscriptionLike &#123;</span><br><span class="line">    observers: Observer&lt;T&gt;[];</span><br><span class="line">    closed: boolean;</span><br><span class="line">    isStopped: boolean;</span><br><span class="line">    hasError: boolean;</span><br><span class="line">    thrownError: any;</span><br><span class="line">    constructor();</span><br><span class="line">    /**@nocollapse */</span><br><span class="line">    static create: Function;</span><br><span class="line">    lift&lt;R&gt;(operator: Operator&lt;T, R&gt;): Observable&lt;R&gt;;</span><br><span class="line">    next(value?: T): void;</span><br><span class="line">    error(err: any): void;</span><br><span class="line">    complete(): void;</span><br><span class="line">    unsubscribe(): void;</span><br><span class="line">    /** @deprecated This is an internal implementation detail, do not use. */</span><br><span class="line">    _trySubscribe(subscriber: Subscriber&lt;T&gt;): TeardownLogic;</span><br><span class="line">    /** @deprecated This is an internal implementation detail, do not use. */</span><br><span class="line">    _subscribe(subscriber: Subscriber&lt;T&gt;): Subscription;</span><br><span class="line">    asObservable(): Observable&lt;T&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>可以看到Subject类是Observable类的继承类同时还实现了SubscriptionLike接口。<br>在Angular 2 中RxJS Subject 的最直接应用就是任意组件间的传值：</p>
-<p>在服务文件message.service.ts中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Injectable &#125; from &apos;@angular/core&apos;;</span><br><span class="line">import &#123;Observable&#125; from &apos;rxjs/Observable&apos;;</span><br><span class="line">import &#123; Subject &#125; from &apos;rxjs/Subject&apos;;</span><br><span class="line"></span><br><span class="line">@Injectable()</span><br><span class="line">export class MessageService &#123;</span><br><span class="line">    private subject = new Subject&lt;any&gt;();</span><br><span class="line"></span><br><span class="line">    sendMessage(message: string) &#123;</span><br><span class="line">        this.subject.next(&#123; text: message &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    clearMessage() &#123;</span><br><span class="line">        this.subject.next();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    getMessage(): Observable&lt;any&gt; &#123;</span><br><span class="line">        return this.subject.asObservable();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>在home.component.ts中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Component &#125; from &apos;@angular/core&apos;;</span><br><span class="line"></span><br><span class="line">import &#123; MessageService &#125; from &apos;../_services/index&apos;;</span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">    moduleId: module.id,</span><br><span class="line">    templateUrl: &apos;home.component.html&apos;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">export class HomeComponent &#123;</span><br><span class="line">    constructor(private messageService: MessageService) &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    sendMessage(): void &#123; // 发送消息</span><br><span class="line">        this.messageService.sendMessage(&apos;Message from Home Component to App Component!&apos;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    clearMessage(): void &#123; // 清除消息</span><br><span class="line">        this.messageService.clearMessage();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>在app.component.ts中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Component, OnDestroy &#125; from &apos;@angular/core&apos;;</span><br><span class="line">import &#123; Subscription &#125; from &apos;rxjs/Subscription&apos;;</span><br><span class="line"></span><br><span class="line">import &#123; MessageService &#125; from &apos;./_services/index&apos;;</span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">    moduleId: module.id,</span><br><span class="line">    selector: &apos;app&apos;,</span><br><span class="line">    templateUrl: &apos;app.component.html&apos;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">export class AppComponent implements OnDestroy &#123;</span><br><span class="line">    message: any;</span><br><span class="line">    subscription: Subscription;</span><br><span class="line"></span><br><span class="line">    constructor(private messageService: MessageService) &#123;</span><br><span class="line">        this.subscription = this.messageService.getMessage()</span><br><span class="line">            .subscribe(message =&gt; &#123; this.message = message; &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ngOnDestroy() &#123;</span><br><span class="line">        this.subscription.unsubscribe();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>上书代码实现了从home组件传值至app入口组件。在传值时，subject作为Observable对象使用next方法发送信息；在接受值的时候在getMessage函数中通过asObservable()方法变作为Observer对象接收信息再作处理。这种传值方式不限于父子组件或者是路由相关组件，类似于状态管理。</p>
+<h2 id="Vue的异步渲染"><a href="#Vue的异步渲染" class="headerlink" title="Vue的异步渲染"></a>Vue的异步渲染</h2><ol>
+<li>概述<ul>
+<li>Vue在自身的响应式数据被改变时会触发页面的更新响应机制（变更dom），变更dom的过程是异步的（避免频繁变更影响性能），异步方案优先级（递减）：Promise.then（微任务）=&gt; MutationObserver（微任务，已弃用） =&gt; setImmediate（宏任务） =&gt; MessageChannel（宏任务） =&gt; setTimeout(fn, 0)（宏任务）。如果想立即获取到变更后的dom可以使用Vue.nextTick(callback)。由于MutationObserver（微任务）是HTML5新特性，在IOS端有bug，所以不采用MutationObserver作为异步方案。</li>
+</ul>
+</li>
+<li>Vue的nexTick(callback)<ul>
+<li>大致实现原理：对当前队列中的nextTick的回调函数进行收集，放置于一个执行栈中，待异步渲染执行后清空执行栈。</li>
+<li>可以使用Promise.resolve.then（保证浏览器支持Promise）或者setTimeout(fn, 0)替代nexTick。此时的Promise.resolve.then作为一个微任务，它的回调函数会在Vue的异步渲染（通常是Promise.then）的回调执行完毕后执行（本次事件循环），而setTimeout作为一个宏任务会在下次事件循环最开始被执行。</li>
+</ul>
+</li>
+</ol>
 
       
 
@@ -239,18 +223,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/02/18/使用NgRx-Store对Angular项目进行状态管理/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          使用NgRx/Store对Angular项目进行状态管理
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/12/13/我了解的JavaScript运行机制-3（异步编程方案）/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">我了解的JavaScript运行机制-3（异步编程方案）</div>
+    <a href="/2021/09/07/一些JavaScript/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">一些JavaScript</div>
       <i class="icon-circle-right"></i>
     </a>
   

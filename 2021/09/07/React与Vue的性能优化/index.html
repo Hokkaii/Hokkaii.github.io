@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Hokkaii的博客">
 <meta property="og:description" content="React与Vue的性能优化">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-09-07T15:57:03.826Z">
+<meta property="og:updated_time" content="2021-09-09T04:31:00.674Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React与Vue的性能优化">
 <meta name="twitter:description" content="React与Vue的性能优化">
@@ -165,12 +165,8 @@
         <p>React与Vue的性能优化<br><a id="more"></a></p>
 <h2 id="Webpack层面"><a href="#Webpack层面" class="headerlink" title="Webpack层面"></a>Webpack层面</h2><ol>
 <li>ExtractTextWebpackPlugin：分离css：使js和css并行加载。</li>
-<li>tree shaking：按需打包，如果所有代码都不包含副作用：<br>&emsp;&emsp;我们就可以简单地将sideEffects属性标    记    为 false来告知webpack，它可以安全地删除未用到的export导出。<br>&emsp;&emsp;配置位置：package.json或者是module.rules。</li>
-<li>路由的懒加载主要依赖于webpack的代码分离，webpack4以后主要是splitChunks：<ul>
-<li>splitChunks：缓存：如果我们在部署新版本时不更改资源的文件名，浏览器可能会认为它没有被更新，就会使用它的缓存版本。由于缓存的存在，当你需要获取新的代码时，就会显得很棘手。可以对output的filename进行设置（filename: ‘[name].[chunkhash].js），如果内容更改，构建后的文件名会发生改变，由于第三方源码通常不会改变，那么由于浏览器的缓存机制长期有效，就不会去频繁请求第三方代码，可以通过分离代码的方式把他们分离出来。</li>
-<li>懒加载：使用import()或者是require.ensure引入的代码会被视为懒加载的代码，可以在output中配置chunkFilename决定这种非入口bundle的命名。<br>splitChunks选项可以通过视情况（依据路径，引用方式等）对第三方代码或者是项目代码进行代码分离。</li>
-</ul>
-</li>
+<li>tree shaking：按需打包，如果所有代码都不包含副作用：<br>我们就可以简单地将sideEffects属性标    记    为 false来告知webpack，它可以安全地删除未用到的export导出。<br>配置位置：package.json或者是module.rules。</li>
+<li>路由的懒加载主要依赖于webpack的代码分离，webpack4以后主要是splitChunks：<br>缓存：如果我们在部署新版本时不更改资源的文件名，浏览器可能会认为它没有被更新，就会使用它的缓存版本。由于缓存的存在，当你需要获取新的代码时，就会显得很棘手。可以对output的filename进行设置（filename: ‘[name].[chunkhash].js），如果内容更改，构建后的文件名会发生改变，由于第三方源码通常不会改变，那么由于浏览器的缓存机制长期有效，就不会去频繁请求第三方代码，可以通过分离代码的方式把他们分离出来。<br>懒加载：使用import()或者是require.ensure引入的代码会被视为懒加载的代码，可以在output中配置chunkFilename决定这种非入口bundle的命名。<br>splitChunks选项可以通过视情况（依据路径，引用方式等）对第三方代码或者是项目代码进行代码分离。</li>
 </ol>
 <hr>
 <h2 id="Vue代码层面"><a href="#Vue代码层面" class="headerlink" title="Vue代码层面"></a>Vue代码层面</h2><ol>
@@ -207,7 +203,7 @@
 <hr>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
 <li>为什么vue中没有react中的shouldComponentUpdate？<br>  因为vue的diff算法是基于响应式数据的，并且已经已经把数据的变化准确的响应到了组件。react的diff算法是基于vdom的，也即react跟踪的是标签的页面结构的变化。因此    vue不需要shouldComponentUpdate来对数据进行比较后决定是否更新，可以认为vue已经拥有了PureComponent。</li>
-<li>react与vue的组件颗粒化拆分的作用有何不同？<br>  react可以基于组件的shouldComponentUpdate声明周期进行“是否render”的优化，不render就不更新。<br>  vue拆分组件在于如果子组件的props没有变更，那么它就不会跟随父组件的重新渲染而渲染。</li>
+<li>react与vue的组件颗粒化封装的性能优化原理有何不同？<br>  react可以基于组件的shouldComponentUpdate声明周期进行“是否render”的优化，不render就不diff，只有diff判定vdom发生变更才会响应渲染。<br>  vue拆分组件的作用在于如果子组件的props没有变更，那么它就不会跟随父组件的重新渲染而渲染。</li>
 </ul>
 
       
